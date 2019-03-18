@@ -1,0 +1,105 @@
+/* GLOBAL */
+a{text-decoration: none;color:inherit;}
+a:visited{color: darkred;}
+a:hover{color:red;}
+
+@font-face {
+  font-family: Roboto;
+  src:  url('/static/Roboto-Regular.ttf'),
+        url('/static/Roboto-Bold.ttf'),
+        url('/static/Roboto-Light.ttf'),
+        url('/static/Roboto-Medium.ttf');
+
+}
+
+html,body,div,a{font-family: 'Roboto', serif;}
+
+/* NAVIGATION */
+
+.input{
+  padding: 0 0 0 30px;
+  border-bottom: 1px solid black;
+  width: fit-content;
+  & span{
+    display: -webkit-inline-box;
+    height: 25px;    width:  25px;
+    margin-left: -30px;    margin-bottom: -8px;
+
+    background-image: url("/static/search.jpg");
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: contain;
+  }
+  & span:hover{
+    cursor: pointer;
+    background-size: 70%;
+    background-position: center center;
+  }
+  & input{
+    outline: none;    border: none;
+    padding-top: 5px;    padding-bottom: 5px;    padding-left: 10px;
+    font-size: 1em;
+    font-family: inherit;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+  &::placeholder{
+    color: lightgrey;
+    font-family: inherit;
+    font-weight: 300;
+  }
+  &:hover{
+    border-bottom: 1px solid red;
+  }
+ }
+
+.input:focus-within{
+   border-bottom: 1px solid red;
+ }
+
+/* PRODUCTS GRID */
+
+.wrapper-products{
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  justify-content: space-between;
+  & div p{
+    font-size: 0.95em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: darkslategray;
+    margin-left: 0.3em;
+    margin-bottom: 0;
+    margin-top: 0.2em;
+    padding: 0.1em;
+  }
+  & div span{
+    color: grey;
+    font-weight: 500;
+    margin-left: 0.35em;
+    padding: 0.1em;
+    font-size: 0.8em;
+  }
+}
+
+@media (max-width:1500px) {
+  .wrapper-product{
+    /* grid-template-columns: 1fr 1fr 1fr 1fr; */
+  }
+}
+
+@media (max-width:1200px) {
+  .wrapper-product{
+    /* grid-template-columns: 1fr 1fr 1fr 1fr; */
+  }
+}
+
+@media (max-width:520px) {
+  .wrapper-product{
+    display: block;
+    & div img{
+      width: 70%!important;
+    }
+  }
+}
