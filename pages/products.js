@@ -2,6 +2,7 @@ import 'react-app-polyfill/ie11';
 import Head from 'next/head'
 import Link from 'next/link'
 import Navigation from '../components/Navigation'
+import Meta_inf from '../components/Meta_inf'
 import React, { Component, Fragment } from 'react'
 import axios from 'axios'
 
@@ -87,10 +88,6 @@ export default class extends Component {
     });
   }
 
-  First_type(event){
-
-  }
-
   cleanSearch(){
       this.setState({
         search: ''
@@ -122,36 +119,55 @@ export default class extends Component {
     return (
       <Fragment>
         <Head>
+          <title>Sport</title>
           <meta name="description" content="This is an example of a meta description. This will show up in search results." />
-          <meta charSet="utf-8" />
-          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          <Meta_inf/>
         </Head>
 
-        <Navigation onClick={this.cleanSearch.bind(this)}
-        onFocus={this.First_type.bind(this)}
-        value={this.state.search}
-        onChange={this.updateSearch.bind(this)}/>
+        <div className="page-wrapper">
 
-        <article className="wrapper-products">
-          { filteredPosts &&
-            filteredPosts.
+        <div className="left">
+          <Navigation onClick={this.cleanSearch.bind(this)}
+          value={this.state.search}
+          onChange={this.updateSearch.bind(this)}/>
+        </div>
+
+        <div className="right">
+          <header>
+            Our products
+          </header>
+          <hr/>
+          <article className="wrapper-products"
+            id="wrapper-inner-products">
+            { filteredPosts &&
+              filteredPosts.
               map( post => {
                 return (
-                  <div key={ post.id }>
+                  <div key={ post.id }
+                    className="wrapper-inner-products">
+                    <Link href={ `/products/details/${ post.slug }` }>
+                    <div className="hover-helper">Click to see details...</div>
+                    </Link>
                     <Link href={ `/products/details/${ post.slug }` }>
                       <a href={ `/products/details/${ post.slug }` }>
-                        <img src={ post.acf.icon.sizes.medium}/>
+                        <img src={ post.acf.icon.sizes.medium}
+                          alt="alt text"
+                          className="post-thumb-image"
+                          />
                         <p>{ post.title.rendered }</p>
                         <span> 99£ </span>
                       </a>
                     </Link>
                   </div>
                 )
-            })
-          }
-        </article>
+              })
+            }
+          </article>
+        </div>
 
-      </Fragment>
+      </div>
+
+    </Fragment>
     )
   }
   // END OF RENDER

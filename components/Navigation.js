@@ -23,7 +23,7 @@ function redirect() {
 }
 
 const Btn = ({ onClick , onFocus, value , onChange }) => (
-  <div >
+  <div className="navigation">
 
   <div><Link href="/"><a  onClick={onClick} href="/">Logo</a></Link></div>
 
@@ -37,7 +37,6 @@ const Btn = ({ onClick , onFocus, value , onChange }) => (
 	<span onClick={redirect}></span>
 	<input type="text"
 	value={value}
-	onFocus={onFocus}
 	onChange={onChange}
 	onKeyDown={HandleEvent}
 	id="search"
@@ -86,7 +85,7 @@ const Btn = ({ onClick , onFocus, value , onChange }) => (
 
   <div><Link href="/"><a href="/">Contact us</a></Link></div>
   <div><Link href="/"><a href="/">About</a></Link></div>
-  <div>social icons</div>
+  <footer>social icons</footer>
 
   </div>
 );

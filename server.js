@@ -5,7 +5,7 @@ const next    = require( 'next' );
 const routes = require( './routes' );
 
 // Setup app.
-// const app     = next( { dev: 'production' !== process.env.NODE_ENV } );
+// const app     = next( { dev: false } );
 const app     = next( { dev: true } );
 const handle  = app.getRequestHandler();
 const handler = routes.getRequestHandler( app );

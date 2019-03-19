@@ -2,6 +2,7 @@ import 'react-app-polyfill/ie11';
 import Head from 'next/head'
 import Link from 'next/link'
 import Navigation from '../components/Navigation'
+import Meta_inf from '../components/Meta_inf'
 import React, { Component, Fragment } from 'react'
 import axios from 'axios'
 
@@ -30,15 +31,14 @@ export default class extends Component {
       <Fragment>
         <Head>
           <title>{ this.props.post.title.rendered }</title>
-          <meta name="description" content={  this.props.post.title.rendered  } />
-          <meta charSet="utf-8" />
+          <Meta_inf />
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
-        
+
         <Navigation/>
 
-        <div> <imb src={this.props.post.acf.visual_1.medium}/>  </div>
-        <div> <imb src={this.props.post.acf.visual_2.medium}/>  </div>
+        <div> <img src={this.props.post.acf.visual_1.medium}/>  </div>
+        <div> <img src={this.props.post.acf.visual_2.medium}/>  </div>
 
         <h1>{ this.props.post.title.rendered }</h1>
 
