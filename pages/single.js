@@ -35,62 +35,72 @@ export default class extends Component {
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
 
-        <Navigation/>
+        <div className="page-wrapper">
 
-        <div> <img src={this.props.post.acf.visual_1.medium}/>  </div>
-        <div> <img src={this.props.post.acf.visual_2.medium}/>  </div>
+        <section className="left">
+          <Navigation/>
 
-        <h1>{ this.props.post.title.rendered }</h1>
+        </section>
 
-        <div className="wrapper-colors">
-        {
-          this.props.post.acf.colors.map(post => {
-            return (
-              <div key={ post }
-                className="post-color"
-                dangerouslySetInnerHTML={ {
-                  __html:  post
-                } } />
-            )
-          })
-        }
-        </div>
+        <section className="right">
+          <div> <img src={this.props.post.acf.visual_1.medium || '/static/loading.png'}/>  </div>
+          <div> <img src={this.props.post.acf.visual_2.medium || '/static/loading.png'}/>  </div>
 
-        <div className="wrapper-colors">
-        {
-          this.props.post.acf.sizes.map(post => {
-            return (
-              <div key={ post }
-                className="post-color"
-                dangerouslySetInnerHTML={ {
-                  __html:  post
-                } } />
-            )
-          })
-        }
-        </div>
+          <h1>{ this.props.post.title.rendered }</h1>
 
-        <div className="wrapper-product-navigation">
-          <div>
-            <Link href="/"><a href="/">Our products</a></Link>
+          <div className="wrapper-colors">
+          {
+            this.props.post.acf.colors.map(post => {
+              return (
+                <div key={ post }
+                  className="post-color"
+                  dangerouslySetInnerHTML={ {
+                    __html:  post
+                  } } />
+              )
+            })
+          }
           </div>
-          <div
-            className="post-age"
-            dangerouslySetInnerHTML={ {
-              __html: this.props.post.acf.age
-            } } />
-          <div
-            className="post-gender"
-            dangerouslySetInnerHTML={ {
-              __html: this.props.post.acf.gender
-            } } />
+
+          <div className="wrapper-colors">
+          {
+            this.props.post.acf.sizes.map(post => {
+              return (
+                <div key={ post }
+                  className="post-color"
+                  dangerouslySetInnerHTML={ {
+                    __html:  post
+                  } } />
+              )
+            })
+          }
+          </div>
+
+          <div className="wrapper-product-navigation">
+            <div>
+              <Link href="/"><a href="/">Our products</a></Link>
+            </div>
+            <div
+              className="post-age"
+              dangerouslySetInnerHTML={ {
+                __html: this.props.post.acf.age
+              } } />
+            <div
+              className="post-gender"
+              dangerouslySetInnerHTML={ {
+                __html: this.props.post.acf.gender
+              } } />
+          </div>
+
+            <div
+              className="post-content"
+              dangerouslySetInnerHTML={ {
+                __html: this.props.post.content.rendered
+              } } />
+        </section>
+
         </div>
 
-          <div
-            className="post-content"
-            dangerouslySetInnerHTML={ {
-              __html: this.props.post.content.rendered
-            } } />
       </Fragment>
     )
   }

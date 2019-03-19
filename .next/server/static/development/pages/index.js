@@ -105,8 +105,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _default; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "axios");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/head */ "next/head");
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -128,6 +130,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var _default =
 /*#__PURE__*/
 function (_Component) {
@@ -142,11 +145,11 @@ function (_Component) {
   _createClass(_default, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("html", {
+      return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("html", {
         lang: "en"
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("meta", {
+      }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("meta", {
         charSet: "utf-8"
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("meta", {
+      }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("meta", {
         name: "viewport",
         content: "initial-scale=1.0, width=device-width"
       }));
@@ -154,7 +157,7 @@ function (_Component) {
   }]);
 
   return _default;
-}(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
+}(react__WEBPACK_IMPORTED_MODULE_2__["Component"]);
 
 
 
@@ -204,19 +207,26 @@ function redirect() {
   }
 }
 
+function Filter_popup() {
+  var flex_bool = document.getElementById('filter-popup').style;
+  flex_bool.display = flex_bool.display == 'flex' ? 'none' : 'flex';
+}
+
 var Btn = function Btn(_ref) {
   var onClick = _ref.onClick,
       onFocus = _ref.onFocus,
       value = _ref.value,
       onChange = _ref.onChange;
-  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("nav", {
     className: "navigation"
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/"
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
     onClick: onClick,
     href: "/"
-  }, "Logo"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+  }, "Logo"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: "nav-our-products"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: {
       pathname: '/products',
       query: {
@@ -238,11 +248,44 @@ var Btn = function Btn(_ref) {
     onKeyDown: HandleEvent,
     id: "search",
     placeholder: "search..."
-  })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: "/"
+  })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+    className: "filter-btn",
+    onClick: Filter_popup
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
-    href: "/"
-  }, "FILTER"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    className: "filter-btn-a"
+  }, "FILTER")), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    id: "filter-popup",
+    className: "filter-popup-wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: "filter-popup"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", null, "Gender"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
+    className: "",
+    type: "checkbox",
+    name: "",
+    value: ""
+  }), "Female"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
+    className: "",
+    type: "checkbox",
+    name: "",
+    value: ""
+  }), "Male"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", null, "Age"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
+    className: "",
+    type: "checkbox",
+    name: "",
+    value: ""
+  }), "Adult"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
+    className: "",
+    type: "checkbox",
+    name: "",
+    value: ""
+  }), "Children"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", null, "Products"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+    className: "filter-btn",
+    onClick: Filter_popup
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+    className: "filter-btn-a"
+  }, "FILTER")))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: "nav-category-header-wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: {
       pathname: '/products',
       query: {
@@ -251,9 +294,12 @@ var Btn = function Btn(_ref) {
       }
     }
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+    className: "nav-category-header",
     onClick: onClick,
     href: ""
-  }, "Male")), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+  }, "Male"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: "nav-tabbed-subcategories"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: {
       pathname: '/products',
       query: {
@@ -275,7 +321,9 @@ var Btn = function Btn(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
     onClick: onClick,
     href: "/"
-  }, "Children")))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+  }, "Children")))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: "nav-category-header-wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: {
       pathname: '/products',
       query: {
@@ -284,9 +332,12 @@ var Btn = function Btn(_ref) {
       }
     }
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+    className: "nav-category-header",
     onClick: onClick,
     href: ""
-  }, "Female")), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+  }, "Female"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: "nav-tabbed-subcategories"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: {
       pathname: '/products',
       query: {
@@ -308,15 +359,23 @@ var Btn = function Btn(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
     onClick: onClick,
     href: "/"
-  }, "Children")))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+  }, "Children")))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: "nav-contact-about-subpages-wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: "nav-contact-about-subpages"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/"
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
     href: "/"
-  }, "Contact us"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+  }, "Contact us"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: "nav-contact-about-subpages"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/"
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
     href: "/"
-  }, "About"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("footer", null, "social icons"));
+  }, "About")))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("footer", {
+    className: "social-icons"
+  }, "social icons"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Btn);
@@ -390,7 +449,18 @@ function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_5__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(next_head__WEBPACK_IMPORTED_MODULE_2___default.a, null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("title", null, "Sport"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("meta", {
         name: "description",
         content: "This is an example of a meta description. This will show up in search results."
-      }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_components_Meta_inf__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_components_Navigation__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+      }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_components_Meta_inf__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+        className: "page-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("section", {
+        className: "left"
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_components_Navigation__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("section", {
+        className: "right"
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+        className: "banner-loader"
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("img", {
+        src: null || '/static/banner-loader.png',
+        alt: ""
+      })))));
     }
   }]);
 

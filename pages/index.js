@@ -6,6 +6,7 @@ import Meta_inf from '../components/Meta_inf'
 import React, { Component, Fragment } from 'react'
 import Router from 'next/router'
 
+
 require('es6-promise').polyfill();
 
 export default class extends Component {
@@ -21,7 +22,19 @@ export default class extends Component {
           <Meta_inf />
         </Head>
 
-        <Navigation/>
+        <div className="page-wrapper">
+
+        <section className="left">
+          <Navigation/>
+        </section>
+
+        <section className="right">
+          <div className="banner-loader">
+            <img src={null || '/static/banner-loader.png'} alt="" />
+          </div>
+        </section>
+
+        </div>
 
     </Fragment>
     )

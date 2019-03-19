@@ -22,12 +22,19 @@ function redirect() {
 	}
 }
 
+function Filter_popup() {
+	let flex_bool = document.getElementById('filter-popup').style;
+	flex_bool.display = (flex_bool.display == 'flex') ? 'none' : 'flex';	  
+}
+
 const Btn = ({ onClick , onFocus, value , onChange }) => (
-  <div className="navigation">
+  <nav className="navigation">
 
   <div><Link href="/"><a  onClick={onClick} href="/">Logo</a></Link></div>
 
-  <div ><Link   href={{ pathname: '/products', query: { gender: ['','female',  'male'],       age : ['','children','adult']   } }}>
+  <div className="nav-our-products" ><Link
+		href={{ pathname: '/products', query: { gender: ['','female',  'male'],
+		age : ['','children','adult']   } }}>
   <a onClick={onClick} href="/">
   Our products
   </a></Link>
@@ -44,50 +51,87 @@ const Btn = ({ onClick , onFocus, value , onChange }) => (
 	 ></input>
 	</div>
 
-	<div><Link href="/"><a href="/">FILTER</a></Link></div>
+	<a className="filter-btn" onClick={Filter_popup}>
+		<a className="filter-btn-a">
+		FILTER</a>
+	</a>
 
-	<div>
+	<div id="filter-popup" className="filter-popup-wrapper">
+		<div className="filter-popup">
+			<p>Gender</p>
+			<label>
+				<input className="" type="checkbox" name="" value="" />
+				Female
+			</label>
+			<label>
+				<input className="" type="checkbox" name="" value="" />
+				Male
+			</label>
+			<p>Age</p>
+				<label>
+					<input className="" type="checkbox" name="" value="" />
+					Adult
+				</label>
+				<label>
+					<input className="" type="checkbox" name="" value="" />
+					Children
+				</label>
+			<p>Products</p>
+
+				<a className="filter-btn" onClick={Filter_popup}>
+					<a className="filter-btn-a">
+					FILTER</a>
+				</a>
+		</div>
+	</div>
+
+	<div className="nav-category-header-wrapper">
   <Link  href={{ pathname: '/products', query: {     gender: ['','male'],           age : ['','children','adult']    } }}>
-  <a  onClick={onClick} href="">
+  <a className="nav-category-header" onClick={onClick} href="">
   Male
-  </a></Link>
-
-  <div ><Link  href={{ pathname: '/products', query: {   gender: ['', 'male'],      age : ['','adult']  } }}>
-  <a onClick={onClick} href="/">
-  Adult
   </a></Link></div>
 
-  <div ><Link  href={{ pathname: '/products', query: {    gender: ['', 'male'],  age : ['','children']  } }}>
-  <a  onClick={onClick}  href="/">
-  Children
-  </a></Link></div>
+	<div className="nav-tabbed-subcategories">
+	  <div ><Link  href={{ pathname: '/products', query: {   gender: ['', 'male'],      age : ['','adult']  } }}>
+	  <a onClick={onClick} href="/">
+	  Adult
+	  </a></Link></div>
+
+	  <div ><Link  href={{ pathname: '/products', query: {    gender: ['', 'male'],  age : ['','children']  } }}>
+	  <a  onClick={onClick}  href="/">
+	  Children
+	  </a></Link></div>
   </div>
 
-  <div>
+  <div className="nav-category-header-wrapper">
   <Link  href={{ pathname: '/products', query: { gender: ['', 'female'], age : ['','children','adult']  } }}>
-  <a onClick={onClick} href="">
+  <a  className="nav-category-header" onClick={onClick} href="">
   Female
-  </a></Link>
+  </a></Link></div>
 
-  <div >
-  <Link  href={{ pathname: '/products', query: { gender: ['', 'female'], age : ['','adult']    } }}>
-  <a  onClick={onClick} href="">
-  Adult
-  </a></Link>
+	<div className="nav-tabbed-subcategories">
+	  <div >
+	  <Link  href={{ pathname: '/products', query: { gender: ['', 'female'], age : ['','adult']    } }}>
+	  <a  onClick={onClick} href="">
+	  Adult
+	  </a></Link>
+	  </div>
+
+	  <div ><Link  href={{ pathname: '/products', query: { gender: ['', 'female'], age : ['','children']  } }}>
+	  <a  onClick={onClick} href="/">
+	  Children
+	  </a></Link>
+	  </div>
   </div>
 
-  <div ><Link  href={{ pathname: '/products', query: { gender: ['', 'female'], age : ['','children']  } }}>
-  <a  onClick={onClick} href="/">
-  Children
-  </a></Link>
-  </div>
-  </div>
+	<div className="nav-contact-about-subpages-wrapper">
+	  <div className="nav-contact-about-subpages"><Link href="/"><a href="/">Contact us</a></Link></div>
+	  <div className="nav-contact-about-subpages"><Link href="/"><a href="/">About</a></Link></div>
+	</div>
 
-  <div><Link href="/"><a href="/">Contact us</a></Link></div>
-  <div><Link href="/"><a href="/">About</a></Link></div>
-  <footer>social icons</footer>
+  <footer className="social-icons">social icons</footer>
 
-  </div>
+  </nav>
 );
 
 export default Btn;

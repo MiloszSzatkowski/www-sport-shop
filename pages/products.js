@@ -126,17 +126,19 @@ export default class extends Component {
 
         <div className="page-wrapper">
 
-        <div className="left">
+        <section className="left">
           <Navigation onClick={this.cleanSearch.bind(this)}
           value={this.state.search}
           onChange={this.updateSearch.bind(this)}/>
-        </div>
+      </section>
 
-        <div className="right">
+        <section className="right">
           <header>
-            Our products
+            <h2 className="products-top-description">
+              Our products
+            </h2>
           </header>
-          <hr/>
+          <hr className="hr-products-divider" />
           <article className="wrapper-products"
             id="wrapper-inner-products">
             { filteredPosts &&
@@ -150,7 +152,7 @@ export default class extends Component {
                     </Link>
                     <Link href={ `/products/details/${ post.slug }` }>
                       <a href={ `/products/details/${ post.slug }` }>
-                        <img src={ post.acf.icon.sizes.medium}
+                        <img src={ post.acf.icon.sizes.medium || '/static/loading.png'}
                           alt="alt text"
                           className="post-thumb-image"
                           />
@@ -163,7 +165,7 @@ export default class extends Component {
               })
             }
           </article>
-        </div>
+        </section>
 
       </div>
 
