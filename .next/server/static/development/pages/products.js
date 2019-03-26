@@ -286,10 +286,20 @@ function Filter_popup_navigation_button() {
   fetch_products();
 }
 
+function eval_radio_button() {
+  return ' var that=this; var pr = this.parentElement.querySelectorAll(`input`); \
+	for (var i = 0; i < pr.length; i++) { \
+		if (pr[i] !== that.children[0]) { \
+			 pr[i].checked = false;  \
+		} \
+	} \
+';
+}
+
 function gen_HTML_for_filter_input(fields, url_params, type_, parent_type) {
   // console.log( `Params: ${url_params} , Items: ${Object.values(fields).toString()}`  );
   return Object.values(fields).map(function (item) {
-    return "<label class=\"".concat(parent_type, "\"><input type=\"").concat(type_, "\" name=\"").concat(parent_type, "\" ").concat(url_params != null && url_params.match(new RegExp("(^".concat(item.toLowerCase(), "*|[\\s])"), "g")) ? 'checked' : '', "/>\t\t\t<span>").concat(item, "</span></label>");
+    return "<label class=\"".concat(parent_type, "\" onclick=\"").concat(type_ == 'radio' ? eval_radio_button() : console.log(), "\" ><input type=\"checkbox\" name=\"").concat(parent_type, "\" ").concat(url_params != null && url_params.match(new RegExp("(^".concat(item.toLowerCase(), "*|[\\s])"), "g")) ? 'checked' : '', "/>\t\t\t<span>").concat(item, "</span></label>");
   }).toString().replace(/,/g, '');
 }
 
@@ -317,7 +327,6 @@ function fetch_products() {
     return item != null;
   }).join(' ').trim(); // console.table('\n\n');
 
-  console.log(url_params_genders);
   axios__WEBPACK_IMPORTED_MODULE_6___default.a.get(_components_Vars__WEBPACK_IMPORTED_MODULE_4__["default"] + '/wp-json/global-custom-types/v1/settings').then(function (response) {
     document.getElementById('fetch_types').innerHTML = gen_HTML_for_filter_input(response.data.types.choices, url_params_filters, 'radio', 'types');
     document.getElementById('fetch_genders').innerHTML = gen_HTML_for_filter_input(response.data.genders.choices, url_params_genders, 'checkbox', 'genders');
@@ -365,12 +374,15 @@ var Btn = function Btn(_ref) {
     onKeyDown: HandleEvent,
     id: "search",
     placeholder: "search..."
-  })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+  })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    id: "put-xxx"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+    id: "filter-btn-menu",
     className: "filter-btn",
     onClick: Filter_popup_navigation_button
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "filter-btn-a"
-  }, "FILTER")), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+  }, "FILTER"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "nav-category-header-wrapper"
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: {
@@ -543,6 +555,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! axios */ "axios");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_9__);
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -566,6 +580,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -692,6 +707,35 @@ function (_Component) {
       }
     }
   }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      var that = this;
+      var existing_xs = document.getElementsByClassName('x_butt_filter');
+      console.log(existing_xs);
+      var x_exists = existing_xs.length > 0;
+
+      if (x_exists) {
+        for (var i = 0; i < existing_xs.length; i++) {
+          existing_xs[i].parentNode.removeChild(existing_xs[i]);
+        }
+      }
+
+      var el_ = document.createElement('p');
+      el_.innerHTML = '&#10006;';
+      el_.className = 'x_butt_filter';
+      el_.addEventListener('click', function () {
+        next_router__WEBPACK_IMPORTED_MODULE_9___default.a.push('/products?gender=&gender=female&gender=male&age=&age=children&age=adult');
+      });
+      var popup_check = document.getElementById('put-xxx');
+      popup_check.appendChild(el_);
+
+      if (that.props.query.filters != undefined) {
+        el_.style.display = 'flex';
+      } else {
+        el_.style.display = 'none';
+      }
+    }
+  }, {
     key: "updateSearch",
     value: function updateSearch(event) {
       this.setState({
@@ -756,6 +800,11 @@ function (_Component) {
   _createClass(_default, [{
     key: "render",
     value: function render() {
+      if (this.props.query == null || this.props.query == undefined) {
+        console.log(this.props.query);
+        next_router__WEBPACK_IMPORTED_MODULE_9___default.a.push('/products?gender=&gender=female&gender=male&age=&age=children&age=adult');
+      }
+
       var filteredPosts = (this.props.query != null && this.state.search == '' ? this.props.posts.filter(initial_search, this.props.query) : this.props.posts.filter(search, this.state.search)).filter(search, this.props.query.filters ? this.props.query.filters : '');
       return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_7__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(next_head__WEBPACK_IMPORTED_MODULE_2___default.a, null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("title", null, "Sport"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("meta", {
         name: "description",
@@ -782,7 +831,11 @@ function (_Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("a", {
         href: ""
-      }, "Our products")))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("hr", {
+      }, "Our products")), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("p", {
+        className: "filters-headline"
+      }, this.props.query.filters != undefined ? react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        class: "filters-headline-before"
+      }) : '', this.props.query.filters != undefined ? this.props.query.filters : ''))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("hr", {
         className: "hr-products-divider"
       }), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("article", {
         className: "wrapper-products",

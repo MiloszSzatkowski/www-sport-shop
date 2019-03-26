@@ -6,6 +6,7 @@ import Meta_inf from      '../components/Meta_inf';
 import the_SITE_url from  '../components/Vars';
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
+import Router from 'next/router';
 
 var filterIsOn = false;
 
@@ -101,6 +102,34 @@ export default class extends Component {
     }
   }
 
+  componentDidUpdate(){
+    var that = this;
+
+    var existing_xs = document.getElementsByClassName('x_butt_filter');
+    console.log(existing_xs);
+    var x_exists = existing_xs.length > 0;
+
+    if (x_exists) {
+      for (var i = 0; i < existing_xs.length; i++) {
+        existing_xs[i].parentNode.removeChild(existing_xs[i])
+      }
+    }
+
+    var el_ = document.createElement('p');
+    el_.innerHTML = '&#10006;'; el_.className = 'x_butt_filter';
+    el_.addEventListener('click', function () {
+      Router.push('/products?gender=&gender=female&gender=male&age=&age=children&age=adult');
+    });
+    var popup_check =  document.getElementById('put-xxx');
+    popup_check.appendChild(el_);
+
+    if (that.props.query.filters != undefined) {
+      el_.style.display = 'flex';
+    } else {
+      el_.style.display = 'none';
+    }
+  }
+
   updateSearch(event){
     this.setState({
       search: event.target.value
@@ -115,6 +144,7 @@ export default class extends Component {
   }
 
   static async getInitialProps(context) {
+
     const response = await axios.get( the_SITE_url + '/wp-json/wp/v2/posts')
     return {
       posts: response.data,
@@ -130,6 +160,11 @@ export default class extends Component {
   }
 
   render() {
+
+    if ((this.props.query == null) || (this.props.query == undefined)) {
+      console.log(this.props.query);
+      Router.push('/products?gender=&gender=female&gender=male&age=&age=children&age=adult');
+    }
 
     let filteredPosts =
     (((this.props.query != null) && (this.state.search == '')) ?
@@ -161,6 +196,10 @@ export default class extends Component {
                   Our products
                 </a>
               </Link>
+                <p className="filters-headline">
+                  {(this.props.query.filters != undefined) ?  <div class="filters-headline-before"></div>  : '' }
+                  {(this.props.query.filters != undefined) ? this.props.query.filters   : '' }
+                  </p>
             </h2>
           </header>
           <hr className="hr-products-divider" />

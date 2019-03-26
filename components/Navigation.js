@@ -85,11 +85,23 @@ function Filter_popup_navigation_button() {
 	fetch_products();
 }
 
+function eval_radio_button() {
+	return ' var that=this; var pr = this.parentElement.querySelectorAll(`input`); \
+	for (var i = 0; i < pr.length; i++) { \
+		if (pr[i] !== that.children[0]) { \
+			 pr[i].checked = false;  \
+		} \
+	} \
+'
+}
+
 function gen_HTML_for_filter_input(fields, url_params, type_, parent_type) {
 	// console.log( `Params: ${url_params} , Items: ${Object.values(fields).toString()}`  );
 	return Object.values(fields)
 	.map(item =>
-		(`<label class="${parent_type}"><input type="${type_}" name="${parent_type}" ${((url_params != null)
+		(`<label class="${parent_type}" onclick="${
+			(type_ == 'radio') ? eval_radio_button() : console.log()
+		}" ><input type="checkbox" name="${parent_type}" ${((url_params != null)
 		&&  url_params.match((new RegExp( `(^${item.toLowerCase()}*|[\\s])` , "g")))) ? 'checked' : ''}/>	\
 		<span>${item}</span></label>`))
 		.toString().replace(/,/g, '');
@@ -101,7 +113,6 @@ function fetch_products() {
 	var url_params_genders = tr.filter(item => (item.match(/^gender*/))).map(item => (item.replace("gender=",''))).filter(item => (item != null)).join(' ').trim();
 	var url_params_ages = tr.filter(item => (item.match(/^age*/))).map(item => (item.replace("age=",''))).filter(item => (item != null)).join(' ').trim();
 	// console.table('\n\n');
-	console.log(url_params_genders);
 	axios.get(the_SITE_url + '/wp-json/global-custom-types/v1/settings')
 	.then(function (response) {
 			document.getElementById('fetch_types').innerHTML = gen_HTML_for_filter_input(response.data.types.choices, url_params_filters, 'radio', 'types');
@@ -140,13 +151,14 @@ const Btn = ({ onClick , onFocus, value , onChange }) => (
 	 ></input>
 	</div>
 
-	<a className="filter-btn" onClick={Filter_popup_navigation_button}>
-		<div className="filter-btn-a">
-		FILTER</div>
-	</a>
+	<div id="put-xxx"><a id="filter-btn-menu" className="filter-btn" onClick={Filter_popup_navigation_button}>
+			<div className="filter-btn-a">
+			FILTER</div>
+		</a>
+	</div>
 
 	<div className="nav-category-header-wrapper">
-  <Link  href={{ pathname: '/products', query: {     gender: ['','male'],           age : ['','children','adult']    } }}>
+  <Link  href={{ pathname: '/products', query: {     gender: ['','male'],           age : ['','children','adult']    } }} >
   <a className="nav-category-header" onClick={onClick} href="">
   Male
   </a></Link></div>

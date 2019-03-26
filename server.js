@@ -10,6 +10,11 @@ const app     = next( { dev: true } );
 const handle  = app.getRequestHandler();
 const handler = routes.getRequestHandler( app );
 
+const redirects = [
+  { from: '/products/details', to: '/' },
+  { from: '/products/details/', to: '/' },
+]
+
 app.prepare()
   .then( () => {
 
@@ -18,6 +23,12 @@ app.prepare()
 
     // Use our handler for requests.
     server.use( handler );
+
+    redirects.forEach(({ from, to, method = 'get' }) => { //type not defined
+      server[method](from, (req, res) => {
+        res.redirect(type, to)
+      })
+    });
 
     // Don't remove. Important for the server to work. Default route.
     server.get( '*', ( req, res ) => {
