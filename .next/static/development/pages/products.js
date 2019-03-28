@@ -79,6 +79,7 @@ function (_Component) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _default; });
 /* harmony import */ var react_app_polyfill_ie11__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-app-polyfill/ie11 */ "./node_modules/react-app-polyfill/ie11.js");
 /* harmony import */ var react_app_polyfill_ie11__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_app_polyfill_ie11__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
@@ -94,6 +95,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! next/router */ "./node_modules/next/router.js");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_7__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
@@ -245,170 +265,238 @@ function fetch_products() {
   });
 }
 
-var Btn = function Btn(_ref) {
-  var onClick = _ref.onClick,
-      onFocus = _ref.onFocus,
-      value = _ref.value,
-      onChange = _ref.onChange;
-  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("nav", {
-    className: "navigation"
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: "/"
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
-    onClick: onClick,
-    href: "/"
-  }, "Logo"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    className: "nav-our-products"
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: {
-      pathname: '/products',
-      query: {
-        gender: ['', 'female', 'male'],
-        age: ['', 'children', 'adult']
-      }
-    }
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
-    onClick: onClick,
-    href: "/"
-  }, "Our products"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    className: "input"
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", {
-    onClick: redirect
-  }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
-    type: "text",
-    value: value,
-    onChange: onChange,
-    onKeyDown: HandleEvent,
-    id: "search",
-    placeholder: "search..."
-  })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    id: "put-xxx"
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
-    id: "filter-btn-menu",
-    className: "filter-btn",
-    onClick: Filter_popup_navigation_button
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    className: "filter-btn-a"
-  }, "FILTER"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    className: "nav-category-header-wrapper"
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: {
-      pathname: '/products',
-      query: {
-        gender: ['', 'male'],
-        age: ['', 'children', 'adult']
-      }
-    }
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
-    className: "nav-category-header",
-    onClick: onClick,
-    href: ""
-  }, "Male"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    className: "nav-tabbed-subcategories"
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: {
-      pathname: '/products',
-      query: {
-        gender: ['', 'male'],
-        age: ['', 'adult']
-      }
-    }
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
-    onClick: onClick,
-    href: "/"
-  }, "Adult"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: {
-      pathname: '/products',
-      query: {
-        gender: ['', 'male'],
-        age: ['', 'children']
-      }
-    }
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
-    onClick: onClick,
-    href: "/"
-  }, "Children")))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    className: "nav-category-header-wrapper"
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: {
-      pathname: '/products',
-      query: {
-        gender: ['', 'female'],
-        age: ['', 'children', 'adult']
-      }
-    }
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
-    className: "nav-category-header",
-    onClick: onClick,
-    href: ""
-  }, "Female"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    className: "nav-tabbed-subcategories"
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: {
-      pathname: '/products',
-      query: {
-        gender: ['', 'female'],
-        age: ['', 'adult']
-      }
-    }
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
-    onClick: onClick,
-    href: ""
-  }, "Adult"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: {
-      pathname: '/products',
-      query: {
-        gender: ['', 'female'],
-        age: ['', 'children']
-      }
-    }
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
-    onClick: onClick,
-    href: "/"
-  }, "Children")))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    className: "nav-contact-about-subpages-wrapper"
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    className: "nav-contact-about-subpages"
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: "/"
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
-    href: "/"
-  }, "Contact us"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    className: "nav-contact-about-subpages"
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: "/"
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
-    href: "/"
-  }, "About")))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("footer", {
-    className: "social-icons"
-  }, "social icons")), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    id: "filter-popup",
-    className: "filter-popup-wrapper",
-    onClick: Filter_popup_wrapper
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    className: "filter-popup"
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    className: "divide-row"
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    className: "float-left"
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", null, "Gender"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    id: "fetch_genders"
-  }, "loading..."), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", null, "Products"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    id: "fetch_types"
-  }, "loading..."))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    className: "float-right"
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", null, "Age"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    id: "fetch_ages"
-  }, "loading..."))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
-    id: "filter",
-    className: "filter-btn",
-    onClick: Filter_popup_more
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    className: "filter-btn-a"
-  }, "FILTER"))))));
-};
+var _default =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(_default, _Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (Btn);
+  function _default(props) {
+    var _this;
+
+    _classCallCheck(this, _default);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(_default).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentWillMount", function () {
+      // console.log('mount');
+      var that = _assertThisInitialized(_assertThisInitialized(_this));
+
+      axios__WEBPACK_IMPORTED_MODULE_6___default.a.get(_components_Vars__WEBPACK_IMPORTED_MODULE_4__["default"] + '/wp-json/global-api/v1/settings').then(function (response) {
+        that.setState({
+          logo_src: response.data.logo_src
+        });
+      }).then({//
+      });
+      axios__WEBPACK_IMPORTED_MODULE_6___default.a.get(_components_Vars__WEBPACK_IMPORTED_MODULE_4__["default"] + '/wp-json/wp/v2/posts').then(function (response) {
+        that.setState({
+          nr_ch_f: Object.keys(response.data.filter(function (i) {
+            return i.acf.gender == 'female' && i.acf.age == 'children';
+          })).length,
+          nr_ch_m: Object.keys(response.data.filter(function (i) {
+            return i.acf.gender == 'male' && i.acf.age == 'children';
+          })).length,
+          nr_ad_f: Object.keys(response.data.filter(function (i) {
+            return i.acf.gender == 'female' && i.acf.age == 'adult';
+          })).length,
+          nr_ad_m: Object.keys(response.data.filter(function (i) {
+            return i.acf.gender == 'male' && i.acf.age == 'adult';
+          })).length,
+          nr_men: Object.keys(response.data.filter(function (i) {
+            return i.acf.gender == 'male';
+          })).length,
+          nr_wom: Object.keys(response.data.filter(function (i) {
+            return i.acf.gender == 'female';
+          })).length
+        });
+      }).then({//
+      });
+    });
+
+    _this.state = {
+      logo_src: '/static/loading_white.png',
+      nr_ch_f: '0',
+      nr_ch_m: '0',
+      nr_ad_f: '0',
+      nr_ad_m: '0',
+      nr_men: '0',
+      nr_wom: '0'
+    };
+    return _this;
+  }
+
+  _createClass(_default, [{
+    key: "render",
+    value: function render() {
+      var global = {
+        state: this.state
+      };
+      return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("nav", {
+        className: "navigation"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        href: "/"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+        onClick: this.props.onClick,
+        href: "/"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
+        id: "logo",
+        src: global.state.logo_src || 'static/loading_white.png',
+        alt: "logo"
+      })))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "nav-our-products"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        href: {
+          pathname: '/products',
+          query: {
+            gender: ['', 'female', 'male'],
+            age: ['', 'children', 'adult']
+          }
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+        onClick: this.props.onClick,
+        href: "/"
+      }, "Our products"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "input"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", {
+        onClick: redirect
+      }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
+        type: "text",
+        value: this.props.value,
+        onChange: this.props.onChange,
+        onKeyDown: this.props.HandleEvent,
+        id: "search",
+        placeholder: "search..."
+      })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        id: "put-xxx"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+        id: "filter-btn-menu",
+        className: "filter-btn",
+        onClick: Filter_popup_navigation_button
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "filter-btn-a"
+      }, "FILTER"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "nav-category-header-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        href: {
+          pathname: '/products',
+          query: {
+            gender: ['', 'male'],
+            age: ['', 'children', 'adult']
+          }
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+        className: "nav-category-header",
+        onClick: this.props.onClick,
+        href: ""
+      }, "Male (", global.state.nr_men, ")"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "nav-tabbed-subcategories"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        href: {
+          pathname: '/products',
+          query: {
+            gender: ['', 'male'],
+            age: ['', 'adult']
+          }
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+        onClick: this.props.onClick,
+        href: "/"
+      }, "Adult   (", global.state.nr_ad_m, ")"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        href: {
+          pathname: '/products',
+          query: {
+            gender: ['', 'male'],
+            age: ['', 'children']
+          }
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+        onClick: this.props.onClick,
+        href: "/"
+      }, "Children  (", global.state.nr_ch_m, ")")))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "nav-category-header-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        href: {
+          pathname: '/products',
+          query: {
+            gender: ['', 'female'],
+            age: ['', 'children', 'adult']
+          }
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+        className: "nav-category-header",
+        onClick: this.props.onClick,
+        href: ""
+      }, "Female (", global.state.nr_wom, ")"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "nav-tabbed-subcategories"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        href: {
+          pathname: '/products',
+          query: {
+            gender: ['', 'female'],
+            age: ['', 'adult']
+          }
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+        onClick: this.props.onClick,
+        href: ""
+      }, "Adult (", global.state.nr_ad_f, ")"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        href: {
+          pathname: '/products',
+          query: {
+            gender: ['', 'female'],
+            age: ['', 'children']
+          }
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+        onClick: this.props.onClick,
+        href: "/"
+      }, "Children (", global.state.nr_ch_f, ")")))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "nav-contact-about-subpages-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "nav-contact-about-subpages"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        href: "/"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+        href: "/"
+      }, "Contact us"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "nav-contact-about-subpages"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        href: "/"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+        href: "/"
+      }, "About")))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("footer", {
+        className: "social-icons"
+      })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        id: "filter-popup",
+        className: "filter-popup-wrapper",
+        onClick: Filter_popup_wrapper
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "filter-popup"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "divide-row"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "float-left"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", null, "Gender"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        id: "fetch_genders"
+      }, "loading..."), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", null, "Products"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        id: "fetch_types"
+      }, "loading..."))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "float-right"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", null, "Age"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        id: "fetch_ages"
+      }, "loading..."))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+        id: "filter",
+        className: "filter-btn",
+        onClick: Filter_popup_more
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "filter-btn-a"
+      }, "FILTER"))))));
+    }
+  }]);
+
+  return _default;
+}(react__WEBPACK_IMPORTED_MODULE_2__["Component"]);
+
+
 
 /***/ }),
 
@@ -416,23 +504,15 @@ var Btn = function Btn(_ref) {
 /*!****************************!*\
   !*** ./components/Vars.js ***!
   \****************************/
-/*! exports provided: global_settings, default */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "global_settings", function() { return global_settings; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
-var globalData;
 var the_SITE_url = 'http://davidstobart.local';
-axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(the_SITE_url + '/wp-json/global-api/v1/settings').then(function (response) {
-  global_settings = response; // console.log(response.data);
-}).catch(function (error) {// console.log(error);
-}).then(function () {// always executed
-});
-var global_settings;
 /* harmony default export */ __webpack_exports__["default"] = (the_SITE_url);
 
 /***/ }),
@@ -15924,8 +16004,8 @@ function (_Component) {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
       var that = this;
-      var existing_xs = document.getElementsByClassName('x_butt_filter');
-      console.log(existing_xs);
+      var existing_xs = document.getElementsByClassName('x_butt_filter'); // console.log(existing_xs);
+
       var x_exists = existing_xs.length > 0;
 
       if (x_exists) {
@@ -16014,6 +16094,8 @@ function (_Component) {
   _createClass(_default, [{
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       if (this.props.query == null || this.props.query == undefined) {
         console.log(this.props.query);
         next_router__WEBPACK_IMPORTED_MODULE_9___default.a.push('/products?gender=&gender=female&gender=male&age=&age=children&age=adult');
@@ -16035,7 +16117,7 @@ function (_Component) {
         className: "right"
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("h2", {
         className: "products-top-description"
-      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
         href: {
           pathname: '/products',
           query: {
@@ -16045,10 +16127,46 @@ function (_Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("a", {
         href: ""
-      }, "Our products")), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("p", {
+      }, "Our products")), this.props.query.gender ? react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("a", null, "\u203A") : '', this.props.query.gender && this.props.query.gender.filter(function (i) {
+        return i != '';
+      }).map(function (item, index) {
+        return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
+          key: item.toString(),
+          href: {
+            pathname: '/products',
+            query: {
+              gender: ['', "".concat(item)],
+              age: ['children', 'adult']
+            }
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("a", {
+          key: item.toString(),
+          href: ""
+        }, item.toString(), Object.keys(_this2.props.query.gender.filter(function (i) {
+          return i != '';
+        })).length > 1 && index == 0 ? "   &" : ''));
+      }), this.props.query.gender ? react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("a", null, "\u203A") : '', this.props.query.age && this.props.query.age.filter(function (i) {
+        return i != '';
+      }).map(function (item, index) {
+        return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
+          key: item.toString(),
+          href: {
+            pathname: '/products',
+            query: {
+              gender: ['female', 'male'],
+              age: ['', "".concat(item)]
+            }
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("a", {
+          key: item.toString(),
+          href: ""
+        }, item.toString(), Object.keys(_this2.props.query.age.filter(function (i) {
+          return i != '';
+        })).length > 1 && index == 0 ? "   &" : ''));
+      })), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("p", {
         className: "filters-headline"
-      }, this.props.query.filters != undefined ? react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
-        class: "filters-headline-before"
+      }, this.props.query.filters != undefined ? react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("span", {
+        className: "filters-headline-before"
       }) : '', this.props.query.filters != undefined ? this.props.query.filters : ''))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("hr", {
         className: "hr-products-divider"
       }), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("article", {
@@ -16102,7 +16220,7 @@ function (_Component) {
 
 /***/ }),
 
-/***/ 6:
+/***/ 3:
 /*!*********************************!*\
   !*** multi ./pages/products.js ***!
   \*********************************/
@@ -16127,5 +16245,5 @@ module.exports = dll_361721b8b542335c6310;
 
 /***/ })
 
-},[[6,"static/runtime/webpack.js","styles"]]]));;
+},[[3,"static/runtime/webpack.js","styles"]]]));;
 //# sourceMappingURL=products.js.map

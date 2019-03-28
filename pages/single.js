@@ -12,21 +12,52 @@ import the_SITE_url from '../components/Vars';
 
 export default class extends Component {
 
-  // Resolve promise and set initial props.
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      image_data_1: '',
+      image_data_2: ''
+    };
+  }
+
+
+  componentDidMount(){
+    var that = this;
+    var width = window.innerWidth;
+    if (width < 500) {
+      that.setState({ image_data_1: that.props.post.acf.visual_1.sizes.medium });
+      that.setState({ image_data_2: that.props.post.acf.visual_2.sizes.medium });
+
+    } else if (500 <= width < 900) {
+      that.setState({ image_data_1: that.props.post.acf.visual_1.sizes.medium_large });
+      that.setState({ image_data_2: that.props.post.acf.visual_2.sizes.medium_large });
+
+    } if (900 <= width) {
+      that.setState({ image_data_1: that.props.post.acf.visual_1.sizes.large });
+      that.setState({ image_data_2: that.props.post.acf.visual_2.sizes.large });
+
+    }
+    that.forceUpdate();
+    // console.log(that.state);
+  }
+
+
   static async getInitialProps( context ) {
 
     const slug = context.query.slug;
-    // console.log('SLUG', context.query.slug);
-    // Make request for posts.
     const response = await axios.get( `${the_SITE_url}/wp-json/wp/v2/posts?slug=${ slug }` )
 
-    // Return our only item in array from response to posts object in props.
     return {
       post: response.data[0]
     }
   }
 
   render() {
+    // console.log(this.props.post.acf.visual_1.sizes);
+
+    const  global  = {state: this.state};
+
     return (
       <Fragment>
         <Head>
@@ -43,64 +74,55 @@ export default class extends Component {
         </section>
 
         <section className="right">
-          <div> <img src={this.props.post.acf.visual_1.medium || '/static/loading.png'}/>  </div>
-          <div> <img src={this.props.post.acf.visual_2.medium || '/static/loading.png'}/>  </div>
 
-          <h1>{ this.props.post.title.rendered }</h1>
+          <div className="wrapper-single-post">
 
-          <div className="wrapper-colors">
-          {
-            this.props.post.acf.colors.map(post => {
-              return (
-                <div key={ post }
-                  className="post-color"
-                  dangerouslySetInnerHTML={ {
-                    __html:  post
-                  } } />
-              )
-            })
-          }
-          </div>
-
-          <div className="wrapper-colors">
-          {
-            this.props.post.acf.sizes.map(post => {
-              return (
-                <div key={ post }
-                  className="post-color"
-                  dangerouslySetInnerHTML={ {
-                    __html:  post
-                  } } />
-              )
-            })
-          }
-          </div>
-
-          <div className="wrapper-product-navigation">
-            <div>
-              <Link href="/"><a href="/">Our products</a></Link>
+            <div className="single-images">
+              <div><img alt="" src={ global.state.image_data_1 }/></div>
+              <div> <img alt="" className="sec_im_1" src={ global.state.image_data_2 }/></div>
             </div>
-            <div
-              className="post-age"
-              dangerouslySetInnerHTML={ {
-                __html: this.props.post.acf.age
-              } } />
-            <div
-              className="post-gender"
-              dangerouslySetInnerHTML={ {
-                __html: this.props.post.acf.gender
-              } } />
+
+            <div className="single-desc">
+
+              <div className="wrapper-product-navigation">
+                <Link href="/products?gender=&gender=female&gender=male&age=&age=children&age=adult">
+                  <a href="/products?gender=&gender=female&gender=male&age=&age=children&age=adult">Our products &rsaquo; </a>
+                </Link>
+                <Link  href={{ pathname: '/products', query: {     gender: ['',`${this.props.post.acf.gender}`],           age : ['','children','adult']    } }}>
+                  <a href="/">{this.props.post.acf.gender} &rsaquo; </a>
+                </Link>
+                <Link  href={{ pathname: '/products', query: {     gender: ['female','male'],           age : ['',`${this.props.post.acf.gender}`]    } }}>
+                  <a href="/">{this.props.post.acf.age}</a>
+                </Link>
+              </div>
+
+              <h1>{ this.props.post.title.rendered }</h1>
+              <h3 className="price">£ {this.props.post.acf.price} </h3>
+
+              <div className="inline-wrapper">
+              <h2>Colors: </h2>
+              {  this.props.post.acf.colors.map((p,i,arr) => {return (<p className="pre-white">{p}{(i !== arr.length-1) ? ', ' : ' ' }</p>)})}
+              </div>
+
+              <div className="inline-wrapper">
+              <h2>Sizes: </h2>
+              {  this.props.post.acf.sizes.map((post,index) => {
+                  return (
+                    <div key={ index }   className="box" >
+                    <p>  {post}  </p>
+                    </div>                  )              })             }
+              </div>
+
+              <div>{this.props.post.acf.description}</div>
+
+            </div>
+            <div className="single-images"> <img alt="" className="sec_im_2" src={ global.state.image_data_2 }/></div>
+
+
           </div>
 
-            <div
-              className="post-content"
-              dangerouslySetInnerHTML={ {
-                __html: this.props.post.content.rendered
-              } } />
         </section>
-
         </div>
-
       </Fragment>
     )
   }

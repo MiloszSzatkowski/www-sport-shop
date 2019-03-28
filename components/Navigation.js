@@ -3,7 +3,6 @@ import Link from 'next/link';
 import React, { Component, Fragment } from 'react';
 import normalize from '../static/normalize.css';
 import the_SITE_url from  '../components/Vars';
-import global_settings from '../components/Vars';
 import style from '../static/style.css';
 import axios from 'axios';
 
@@ -126,122 +125,174 @@ function fetch_products() {
 	})
 }
 
-const Btn = ({ onClick , onFocus, value , onChange }) => (
-	<div>
-  <nav className="navigation">
 
-  <div><Link href="/"><a  onClick={onClick} href="/">Logo</a></Link></div>
+export default class extends Component {
 
-  <div className="nav-our-products" ><Link
-		href={{ pathname: '/products', query: { gender: ['','female',  'male'],
-		age : ['','children','adult']   } }}>
-  <a onClick={onClick} href="/">
-  Our products
-  </a></Link>
-  </div>
+	constructor(props) {
+    super(props);
 
-	<div className="input">
-	<span onClick={redirect}></span>
-	<input type="text"
-	value={value}
-	onChange={onChange}
-	onKeyDown={HandleEvent}
-	id="search"
-	placeholder="search..."
-	 ></input>
-	</div>
+    this.state = {
+      logo_src: '/static/loading_white.png',
+			nr_ch_f: '0',
+			nr_ch_m: '0',
+			nr_ad_f: '0',
+			nr_ad_m: '0',
+			nr_men: '0',
+			nr_wom: '0'
+    };
+  }
 
-	<div id="put-xxx"><a id="filter-btn-menu" className="filter-btn" onClick={Filter_popup_navigation_button}>
-			<div className="filter-btn-a">
-			FILTER</div>
-		</a>
-	</div>
+	componentWillMount = () => {
+		// console.log('mount');
+		var that  = this;
+		axios.get( the_SITE_url + '/wp-json/global-api/v1/settings').
+		then(function(response){
+			that.setState({
+				logo_src: response.data.logo_src,
+			 })
+		}).then({
+			//
+		})
 
-	<div className="nav-category-header-wrapper">
-  <Link  href={{ pathname: '/products', query: {     gender: ['','male'],           age : ['','children','adult']    } }} >
-  <a className="nav-category-header" onClick={onClick} href="">
-  Male
-  </a></Link></div>
+		axios.get( the_SITE_url + '/wp-json/wp/v2/posts').
+		then(function(response){
+			that.setState({
+				nr_ch_f: Object.keys(response.data.filter(i=> ((i.acf.gender  == 'female') && (i.acf.age  == 'children') ))).length,
+				nr_ch_m: Object.keys(response.data.filter(i=> ((i.acf.gender  == 'male') && (i.acf.age  == 'children') ))).length,
+				nr_ad_f: Object.keys(response.data.filter(i=> ((i.acf.gender  == 'female') && (i.acf.age  == 'adult') ))).length,
+				nr_ad_m: Object.keys(response.data.filter(i=> ((i.acf.gender  == 'male') && (i.acf.age  == 'adult') ))).length,
+				nr_men: Object.keys(response.data.filter(i=> (i.acf.gender  == 'male' ))).length,
+				nr_wom: Object.keys(response.data.filter(i=> (i.acf.gender  == 'female' ))).length,
+			 })
+		}).then({
+			//
+		})
+	}
 
-	<div className="nav-tabbed-subcategories">
-	  <div ><Link  href={{ pathname: '/products', query: {   gender: ['', 'male'],      age : ['','adult']  } }}>
-	  <a onClick={onClick} href="/">
-	  Adult
-	  </a></Link></div>
 
-	  <div ><Link  href={{ pathname: '/products', query: {    gender: ['', 'male'],  age : ['','children']  } }}>
-	  <a  onClick={onClick}  href="/">
-	  Children
-	  </a></Link></div>
-  </div>
+	render(){
+		const  global  = {state: this.state};
 
-  <div className="nav-category-header-wrapper">
-  <Link  href={{ pathname: '/products', query: { gender: ['', 'female'], age : ['','children','adult']  } }}>
-  <a  className="nav-category-header" onClick={onClick} href="">
-  Female
-  </a></Link></div>
+		return(
+			<div>
+		  <nav className="navigation">
 
-	<div className="nav-tabbed-subcategories">
-	  <div >
-	  <Link  href={{ pathname: '/products', query: { gender: ['', 'female'], age : ['','adult']    } }}>
-	  <a  onClick={onClick} href="">
-	  Adult
-	  </a></Link>
-	  </div>
+		  <div><Link href="/"><a  onClick={this.props.onClick} href="/">
+				<img id="logo" src={global.state.logo_src || 'static/loading_white.png'} alt="logo" /></a></Link></div>
 
-	  <div ><Link  href={{ pathname: '/products', query: { gender: ['', 'female'], age : ['','children']  } }}>
-	  <a  onClick={onClick} href="/">
-	  Children
-	  </a></Link>
-	  </div>
-  </div>
+		  <div className="nav-our-products" ><Link
+				href={{ pathname: '/products', query: { gender: ['','female',  'male'],
+				age : ['','children','adult']   } }}>
+		  <a onClick={this.props.onClick} href="/">
+		  Our products
+		  </a></Link>
+		  </div>
 
-	<div className="nav-contact-about-subpages-wrapper">
-	  <div className="nav-contact-about-subpages"><Link href="/"><a href="/">Contact us</a></Link></div>
-	  <div className="nav-contact-about-subpages"><Link href="/"><a href="/">About</a></Link></div>
-	</div>
-
-  <footer className="social-icons">social icons</footer>
-
-  </nav>
-
-	<div id="filter-popup" className="filter-popup-wrapper"
-	onClick={Filter_popup_wrapper}>
-		<div className="filter-popup">
-
-			<div className="divide-row" >
-				<div className="float-left">
-					<p>Gender</p>
-						<div id="fetch_genders">
-							loading...
-						</div>
-					<div >
-						<p>Products</p>
-						<div id="fetch_types">
-							loading...
-						</div>
-					</div>
-				</div>
-
-				<div className="float-right">
-				<p>Age</p>
-					<div id="fetch_ages" >
-						loading...
-					</div>
-				</div>
+			<div className="input">
+			<span onClick={redirect}></span>
+			<input type="text"
+			value={this.props.value}
+			onChange={this.props.onChange}
+			onKeyDown={this.props.HandleEvent}
+			id="search"
+			placeholder="search..."
+			 ></input>
 			</div>
 
-			<div>
-				<a id="filter" className="filter-btn" onClick={Filter_popup_more}>
+			<div id="put-xxx"><a id="filter-btn-menu" className="filter-btn" onClick={Filter_popup_navigation_button}>
 					<div className="filter-btn-a">
 					FILTER</div>
 				</a>
 			</div>
 
+			<div className="nav-category-header-wrapper">
+		  <Link  href={{ pathname: '/products', query: {     gender: ['','male'],           age : ['','children','adult']    } }} >
+		  <a className="nav-category-header" onClick={this.props.onClick} href="">
+		  Male ({global.state.nr_men})
+		  </a></Link></div>
+
+			<div className="nav-tabbed-subcategories">
+			  <div ><Link  href={{ pathname: '/products', query: {   gender: ['', 'male'],      age : ['','adult']  } }}>
+			  <a onClick={this.props.onClick} href="/">
+			  Adult   ({global.state.nr_ad_m})
+			  </a></Link></div>
+
+			  <div ><Link  href={{ pathname: '/products', query: {    gender: ['', 'male'],  age : ['','children']  } }}>
+			  <a  onClick={this.props.onClick}  href="/">
+			  Children  ({global.state.nr_ch_m})
+			  </a></Link></div>
+		  </div>
+
+		  <div className="nav-category-header-wrapper">
+		  <Link  href={{ pathname: '/products', query: { gender: ['', 'female'], age : ['','children','adult']  } }}>
+		  <a  className="nav-category-header" onClick={this.props.onClick} href="">
+		  Female ({global.state.nr_wom})
+		  </a></Link></div>
+
+			<div className="nav-tabbed-subcategories">
+			  <div >
+			  <Link  href={{ pathname: '/products', query: { gender: ['', 'female'], age : ['','adult']    } }}>
+			  <a  onClick={this.props.onClick} href="">
+			  Adult ({global.state.nr_ad_f})
+			  </a></Link>
+			  </div>
+
+			  <div ><Link  href={{ pathname: '/products', query: { gender: ['', 'female'], age : ['','children']  } }}>
+			  <a  onClick={this.props.onClick} href="/">
+			  Children ({global.state.nr_ch_f})
+			  </a></Link>
+			  </div>
+		  </div>
+
+			<div className="nav-contact-about-subpages-wrapper">
+			  <div className="nav-contact-about-subpages"><Link href="/"><a href="/">Contact us</a></Link></div>
+			  <div className="nav-contact-about-subpages"><Link href="/"><a href="/">About</a></Link></div>
+			</div>
+
+		  <footer className="social-icons">
+			</footer>
+
+		  </nav>
+
+			<div id="filter-popup" className="filter-popup-wrapper"
+			onClick={Filter_popup_wrapper}>
+				<div className="filter-popup">
+
+					<div className="divide-row" >
+						<div className="float-left">
+							<p>Gender</p>
+								<div id="fetch_genders">
+									loading...
+								</div>
+							<div >
+								<p>Products</p>
+								<div id="fetch_types">
+									loading...
+								</div>
+							</div>
+						</div>
+
+						<div className="float-right">
+						<p>Age</p>
+							<div id="fetch_ages" >
+								loading...
+							</div>
+						</div>
+					</div>
+
+					<div>
+						<a id="filter" className="filter-btn" onClick={Filter_popup_more}>
+							<div className="filter-btn-a">
+							FILTER</div>
+						</a>
+					</div>
+
+				</div>
+			</div>
+
 		</div>
-	</div>
+		)
+	}
 
-</div>
-);
 
-export default Btn;
+}

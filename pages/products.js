@@ -106,7 +106,7 @@ export default class extends Component {
     var that = this;
 
     var existing_xs = document.getElementsByClassName('x_butt_filter');
-    console.log(existing_xs);
+    // console.log(existing_xs);
     var x_exists = existing_xs.length > 0;
 
     if (x_exists) {
@@ -191,15 +191,45 @@ export default class extends Component {
         <section className="right">
           <header>
             <h2 className="products-top-description">
-              <Link  href={{ pathname: '/products', query: {   gender: ['female', 'male'],      age : ['children','adult']  } }}>
-                <a href="">
-                  Our products
-                </a>
-              </Link>
+              <span>
+                <Link  href={{ pathname: '/products', query: {   gender: ['female', 'male'],      age : ['children','adult']  } }}>
+                  <a href="">
+                    Our products
+                  </a>
+                </Link>
+                  {(this.props.query.gender) ? <a>&rsaquo;</a> : ''}
+                  {this.props.query.gender &&
+                   this.props.query.gender.filter(i => (i != '')).map(
+                     (item,index) => {
+                      return(
+                              <Link key={item.toString()}  href={{ pathname: '/products', query: {   gender: ['',`${item}`],  age : ['children','adult']  } }}>
+                                  <a  key={item.toString()} href="">{item.toString()}
+                                    {((Object.keys(this.props.query.gender.filter(i => (i != ''))).length > 1) && index == 0) ? `   &` : ''}
+                                  </a>
+                              </Link>
+                          )
+                        }
+                      )
+                    }
+                  {(this.props.query.gender) ? <a>&rsaquo;</a> : ''}
+                  {this.props.query.age &&
+                   this.props.query.age.filter(i => (i != '')).map(
+                     (item, index) => {
+                      return(
+                              <Link key={item.toString()} href={{ pathname: '/products', query: {   gender: ['female', 'male'],  age : ['',`${item}`]  } }}>
+                                <a key={item.toString()}  href="">{item.toString()}
+                                  {((Object.keys(this.props.query.age.filter(i => (i != ''))).length > 1) && index == 0) ? `   &` : ''}
+                                </a>
+                              </Link>
+                          )
+                        }
+                      )
+                    }
+              </span>
                 <p className="filters-headline">
-                  {(this.props.query.filters != undefined) ?  <div class="filters-headline-before"></div>  : '' }
+                  {(this.props.query.filters != undefined) ?  <span className="filters-headline-before"></span>  : '' }
                   {(this.props.query.filters != undefined) ? this.props.query.filters   : '' }
-                  </p>
+                </p>
             </h2>
           </header>
           <hr className="hr-products-divider" />
