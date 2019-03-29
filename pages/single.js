@@ -47,9 +47,10 @@ export default class extends Component {
 
     const slug = context.query.slug;
     const response = await axios.get( `${the_SITE_url}/wp-json/wp/v2/posts?slug=${ slug }` )
-
+    const response_2 = await axios.get( the_SITE_url + '/wp-json/global-api/v1/settings')
     return {
-      post: response.data[0]
+      post: response.data[0],
+      global_: response_2.data
     }
   }
 
@@ -69,11 +70,36 @@ export default class extends Component {
         <div className="page-wrapper">
 
         <section className="left">
-          <Navigation/>
-
+          <Navigation img_logo={this.props.global_.logo_src}/>
         </section>
 
         <section className="right">
+          <header>
+            <h2 className="products-top-description">
+              <span>
+                <Link  href={{ pathname: '/products', query: {   gender: ['female', 'male'],      age : ['children','adult']  } }}>
+                  <a href="">
+                    Our products &rsaquo;
+                  </a>
+                </Link>
+                <Link  href={{ pathname: '/products', query: {
+                  gender: ['', `${this.props.post.acf.gender}`],
+                  age : ['children','adult']  } }}>
+                  <a href="">
+                    {this.props.post.acf.gender} &rsaquo;
+                  </a>
+                </Link>
+                <Link  href={{ pathname: '/products', query: {
+                    gender: ['female', 'male'],
+                    age : ['',`${this.props.post.acf.age}`]  } }}>
+                  <a href="">
+                    {this.props.post.acf.age}
+                  </a>
+                </Link>
+              </span>
+            </h2>
+            <hr/>
+          </header>
 
           <div className="wrapper-single-post">
 

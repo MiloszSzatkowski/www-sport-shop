@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -227,10 +227,7 @@ function HandleEvent(event) {
 function redirect(event) {
   if (window.location.href.indexOf('products') === -1 || window.location.href.indexOf('details') !== -1) {
     var search_query = encodeURI(document.getElementById('search').value.toLowerCase().trim());
-
-    if (search_query != '') {
-      next_router__WEBPACK_IMPORTED_MODULE_7___default.a.push('/products?gender=&gender=female&gender=male&age=&age=children&age=adult&search=' + search_query);
-    }
+    next_router__WEBPACK_IMPORTED_MODULE_7___default.a.push('/products?gender=&gender=female&gender=male&age=&age=children&age=adult&search=' + search_query);
   }
 }
 
@@ -406,6 +403,7 @@ function (_Component) {
     });
 
     _this.state = {
+      loading: '',
       logo_src: '/static/loading_white.png',
       nr_ch_f: '0',
       nr_ch_m: '0',
@@ -418,6 +416,34 @@ function (_Component) {
   }
 
   _createClass(_default, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var wlh = window.location.href;
+      var nav_arr = {
+        our_products: document.getElementById('our-products'),
+        male: document.getElementById('male'),
+        male_adult: document.getElementById('male-adult'),
+        male_children: document.getElementById('male-children'),
+        female: document.getElementById('female'),
+        female_adult: document.getElementById('female-adult'),
+        female_children: document.getElementById('female-children'),
+        contact: document.getElementById('contact'),
+        about: document.getElementById('about')
+      };
+
+      if (wlh.includes('contact')) {
+        nav_arr.contact.classList.add('red');
+      } else if (wlh.includes('about')) {
+        nav_arr.about.classList.add('red');
+      } else if (wlh.includes('male') && wlh.includes('female') && wlh.includes('children') && wlh.includes('adult')) {
+        nav_arr.our_products.classList.add('red');
+      } else if (wlh.includes('female') && wlh.includes('children') && wlh.includes('adult')) {
+        nav_arr.female.classList.add('red');
+      } else if (wlh.includes('male') && !wlh.includes('female') && wlh.includes('children') && wlh.includes('adult')) {
+        nav_arr.male.classList.add('red');
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var global = {
@@ -429,10 +455,11 @@ function (_Component) {
         href: "/"
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
         onClick: this.props.onClick,
-        href: "/"
+        href: "/",
+        prefetch: true
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
         id: "logo",
-        src: global.state.logo_src || 'static/loading_white.png',
+        src: this.props.img_logo,
         alt: "logo"
       })))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
         className: "nav-our-products"
@@ -445,19 +472,20 @@ function (_Component) {
           }
         }
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+        id: "our-products",
         onClick: this.props.onClick,
         href: "/"
       }, "Our products"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
         className: "input"
-      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", {
-        onClick: redirect
-      }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
         type: "text",
         value: this.props.value,
         onChange: this.props.onChange,
         onKeyDown: this.props.HandleEvent,
         id: "search",
         placeholder: "search..."
+      }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", {
+        onClick: redirect
       })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
         id: "put-xxx"
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
@@ -477,6 +505,7 @@ function (_Component) {
           }
         }
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+        id: "male",
         className: "nav-category-header",
         onClick: this.props.onClick,
         href: ""
@@ -491,6 +520,7 @@ function (_Component) {
           }
         }
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+        id: "male-adult",
         onClick: this.props.onClick,
         href: "/"
       }, "Adult   (", global.state.nr_ad_m, ")"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
@@ -502,6 +532,7 @@ function (_Component) {
           }
         }
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+        id: "male-children",
         onClick: this.props.onClick,
         href: "/"
       }, "Children  (", global.state.nr_ch_m, ")")))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
@@ -515,6 +546,7 @@ function (_Component) {
           }
         }
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+        id: "female",
         className: "nav-category-header",
         onClick: this.props.onClick,
         href: ""
@@ -529,6 +561,7 @@ function (_Component) {
           }
         }
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+        id: "female-adult",
         onClick: this.props.onClick,
         href: ""
       }, "Adult (", global.state.nr_ad_f, ")"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
@@ -540,6 +573,7 @@ function (_Component) {
           }
         }
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+        id: "female-children",
         onClick: this.props.onClick,
         href: "/"
       }, "Children (", global.state.nr_ch_f, ")")))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
@@ -547,15 +581,19 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
         className: "nav-contact-about-subpages"
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-        href: "/"
+        href: "/contact"
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
-        href: "/"
+        id: "contact",
+        href: "/contact",
+        prefetch: true
       }, "Contact us"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
         className: "nav-contact-about-subpages"
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-        href: "/"
+        href: "/about"
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
-        href: "/"
+        id: "about",
+        href: "/about",
+        prefetch: true
       }, "About")))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("footer", {
         className: "social-icons"
       })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
@@ -836,7 +874,7 @@ function (_Component) {
       var _getInitialProps = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(context) {
-        var response;
+        var response, response_2;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -846,12 +884,18 @@ function (_Component) {
 
               case 2:
                 response = _context.sent;
+                _context.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_8___default.a.get(_components_Vars__WEBPACK_IMPORTED_MODULE_6__["default"] + '/wp-json/global-api/v1/settings');
+
+              case 5:
+                response_2 = _context.sent;
                 return _context.abrupt("return", {
                   posts: response.data,
-                  query: context.query
+                  query: context.query,
+                  global_: response_2.data
                 });
 
-              case 4:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -888,14 +932,15 @@ function (_Component) {
       }
 
       var filteredPosts = (this.props.query != null && this.state.search == '' ? this.props.posts.filter(initial_search, this.props.query) : this.props.posts.filter(search, this.state.search)).filter(search, this.props.query.filters ? this.props.query.filters : '');
-      return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_7__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(next_head__WEBPACK_IMPORTED_MODULE_2___default.a, null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("title", null, "Sport"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("meta", {
+      return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_7__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(next_head__WEBPACK_IMPORTED_MODULE_2___default.a, null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("title", null, this.props.global_.name), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("meta", {
         name: "description",
-        content: "This is an example of a meta description. This will show up in search results."
+        content: "{this.props.global_.description}"
       }), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_components_Meta_inf__WEBPACK_IMPORTED_MODULE_5__["default"], null)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "page-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("section", {
         className: "left"
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_components_Navigation__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        img_logo: this.props.global_.logo_src,
         onClick: this.cleanSearch.bind(this),
         value: this.state.search,
         onChange: this.updateSearch.bind(this)
@@ -1009,7 +1054,7 @@ function (_Component) {
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!*********************************!*\
   !*** multi ./pages/products.js ***!
   \*********************************/

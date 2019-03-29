@@ -5,7 +5,6 @@ import normalize from '../static/normalize.css';
 import the_SITE_url from  '../components/Vars';
 import style from '../static/style.css';
 import axios from 'axios';
-
 import Router from 'next/router';
 
 function HandleEvent(event){
@@ -19,9 +18,7 @@ function redirect(event) {
 	if ((window.location.href.indexOf('products') === -1) ||
 			(window.location.href.indexOf('details') !== -1)) {
 		var search_query = encodeURI(document.getElementById('search').value.toLowerCase().trim());
-		if (search_query != '') {
-			Router.push('/products?gender=&gender=female&gender=male&age=&age=children&age=adult&search=' + search_query)
-		}
+	  Router.push('/products?gender=&gender=female&gender=male&age=&age=children&age=adult&search=' + search_query)
 	}
 }
 
@@ -132,6 +129,7 @@ export default class extends Component {
     super(props);
 
     this.state = {
+			loading: '',
       logo_src: '/static/loading_white.png',
 			nr_ch_f: '0',
 			nr_ch_m: '0',
@@ -169,6 +167,32 @@ export default class extends Component {
 		})
 	}
 
+	componentDidMount () {
+		var wlh = window.location.href
+		var nav_arr = {
+			our_products: document.getElementById('our-products'),
+			male: document.getElementById('male'),
+			male_adult: document.getElementById('male-adult'),
+			male_children: document.getElementById('male-children'),
+			female: document.getElementById('female'),
+			female_adult: document.getElementById('female-adult'),
+			female_children: document.getElementById('female-children'),
+			contact: document.getElementById('contact'),
+			about: document.getElementById('about')
+		}
+
+		if (wlh.includes('contact')) {
+			nav_arr.contact.classList.add('red');
+		} else if (wlh.includes('about')) {
+			nav_arr.about.classList.add('red');
+		} else if (wlh.includes('male') && wlh.includes('female') && wlh.includes('children') && wlh.includes('adult')) {
+			nav_arr.our_products.classList.add('red');
+		} else if (wlh.includes('female') && wlh.includes('children') && wlh.includes('adult')) {
+			nav_arr.female.classList.add('red');
+		} else if (wlh.includes('male') && (!(wlh.includes('female') )) && wlh.includes('children') && wlh.includes('adult')) {
+			nav_arr.male.classList.add('red');
+		}
+	}
 
 	render(){
 		const  global  = {state: this.state};
@@ -177,19 +201,18 @@ export default class extends Component {
 			<div>
 		  <nav className="navigation">
 
-		  <div><Link href="/"><a  onClick={this.props.onClick} href="/">
-				<img id="logo" src={global.state.logo_src || 'static/loading_white.png'} alt="logo" /></a></Link></div>
+		  <div><Link href="/"><a  onClick={this.props.onClick} href="/" prefetch >
+				<img id="logo" src={this.props.img_logo} alt="logo" /></a></Link></div>
 
 		  <div className="nav-our-products" ><Link
 				href={{ pathname: '/products', query: { gender: ['','female',  'male'],
 				age : ['','children','adult']   } }}>
-		  <a onClick={this.props.onClick} href="/">
+		  <a id="our-products" onClick={this.props.onClick} href="/">
 		  Our products
 		  </a></Link>
 		  </div>
 
 			<div className="input">
-			<span onClick={redirect}></span>
 			<input type="text"
 			value={this.props.value}
 			onChange={this.props.onChange}
@@ -197,6 +220,7 @@ export default class extends Component {
 			id="search"
 			placeholder="search..."
 			 ></input>
+		 <span onClick={redirect}></span>
 			</div>
 
 			<div id="put-xxx"><a id="filter-btn-menu" className="filter-btn" onClick={Filter_popup_navigation_button}>
@@ -207,46 +231,48 @@ export default class extends Component {
 
 			<div className="nav-category-header-wrapper">
 		  <Link  href={{ pathname: '/products', query: {     gender: ['','male'],           age : ['','children','adult']    } }} >
-		  <a className="nav-category-header" onClick={this.props.onClick} href="">
+		  <a id="male" className="nav-category-header" onClick={this.props.onClick} href="">
 		  Male ({global.state.nr_men})
 		  </a></Link></div>
 
 			<div className="nav-tabbed-subcategories">
 			  <div ><Link  href={{ pathname: '/products', query: {   gender: ['', 'male'],      age : ['','adult']  } }}>
-			  <a onClick={this.props.onClick} href="/">
+			  <a id="male-adult" onClick={this.props.onClick} href="/">
 			  Adult   ({global.state.nr_ad_m})
 			  </a></Link></div>
 
 			  <div ><Link  href={{ pathname: '/products', query: {    gender: ['', 'male'],  age : ['','children']  } }}>
-			  <a  onClick={this.props.onClick}  href="/">
+			  <a  id="male-children"  onClick={this.props.onClick}  href="/">
 			  Children  ({global.state.nr_ch_m})
 			  </a></Link></div>
 		  </div>
 
 		  <div className="nav-category-header-wrapper">
 		  <Link  href={{ pathname: '/products', query: { gender: ['', 'female'], age : ['','children','adult']  } }}>
-		  <a  className="nav-category-header" onClick={this.props.onClick} href="">
+		  <a id="female" className="nav-category-header" onClick={this.props.onClick} href="">
 		  Female ({global.state.nr_wom})
 		  </a></Link></div>
 
 			<div className="nav-tabbed-subcategories">
 			  <div >
 			  <Link  href={{ pathname: '/products', query: { gender: ['', 'female'], age : ['','adult']    } }}>
-			  <a  onClick={this.props.onClick} href="">
+			  <a id="female-adult"  onClick={this.props.onClick} href="">
 			  Adult ({global.state.nr_ad_f})
 			  </a></Link>
 			  </div>
 
 			  <div ><Link  href={{ pathname: '/products', query: { gender: ['', 'female'], age : ['','children']  } }}>
-			  <a  onClick={this.props.onClick} href="/">
+			  <a id="female-children"   onClick={this.props.onClick} href="/">
 			  Children ({global.state.nr_ch_f})
 			  </a></Link>
 			  </div>
 		  </div>
 
 			<div className="nav-contact-about-subpages-wrapper">
-			  <div className="nav-contact-about-subpages"><Link href="/"><a href="/">Contact us</a></Link></div>
-			  <div className="nav-contact-about-subpages"><Link href="/"><a href="/">About</a></Link></div>
+			  <div className="nav-contact-about-subpages">
+					<Link href="/contact"><a id="contact"  href="/contact" prefetch >Contact us</a></Link></div>
+			  <div className="nav-contact-about-subpages">
+					<Link href="/about"><a id="about"  href="/about" prefetch >About</a></Link></div>
 			</div>
 
 		  <footer className="social-icons">

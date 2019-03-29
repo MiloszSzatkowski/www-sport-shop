@@ -2,6 +2,7 @@
 a{text-decoration: none; color:inherit; }
 a:visited{color: inherit;}
 a:hover{color:red; cursor: pointer;}
+.red {color:red!important;}
 
 @font-face {
   font-family: Roboto;
@@ -48,27 +49,34 @@ html,body,div,a{font-family: 'Roboto', sans-serif;}
 /* NAVIGATION */
 
 .input{
-  padding: 0 0 0 30px;
+  /* padding: 0 0 0 30px; */
   border-bottom: 1px solid grey;
   width: fit-content;
   & span{
+    z-index: 200;
+    border: 1px solid lightgrey;
+    border-radius: 50%;
     display: -webkit-inline-box;
     height: 25px;    width:  25px;
-    margin-left: -30px;    margin-bottom: -8px;
-
+    padding: 0.2em;
+    margin-left: -30px;    margin-bottom: -4px;
     background-image: url("/static/search.jpg");
     background-repeat: no-repeat;
-    background-position: left bottom;
+    background-position: right bottom;
     background-size: contain;
+    box-shadow: 0px 0px;
+    transition: box-shadow 0.5s linear;
   }
   & span:hover{
+    border-radius: 50%;
     cursor: pointer;
-    background-size: 70%;
-    background-position: center center;
+    box-shadow: 0px 0px 4px 3px lightgrey;
+    /* background-size: 40%; */
+    /* background-position: center center; */
   }
   & input{
     outline: none;    border: none;
-    padding-top: 5px;    padding-bottom: 5px;    padding-left: 10px;
+    padding-top: 5px;    padding-bottom: 5px;    padding-left: 0; padding-right: 35px;
     font-size: 1em;
     font-family: inherit;
     font-weight: 300;
@@ -514,5 +522,85 @@ html,body,div,a{font-family: 'Roboto', sans-serif;}
   }
   .sec_im_2 {
     display: block;
+  }
+}
+
+
+/* CONTACT */
+
+.subpages-title{
+  text-align: center;
+  font-weight: bolder;
+  letter-spacing: 0.07em;
+  font-size: 3.5em;
+  color: dimgrey;
+}
+
+.page-wrapper-contact{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-content: space-around;
+
+  & .right-contact{
+    display: flex;
+    justify-content: flex-end;
+    max-width: 1200px;
+    width: 50%;
+    padding: 2em;
+    & form{
+      margin-top: 1em;
+      width: 90%;
+    }
+    & .input_div{
+      margin-bottom: 1.5em;
+    }
+    & label{
+      display: block;
+      padding-bottom: 0.4em;
+      color: grey;
+      letter-spacing: 0.08em;
+    }
+    & input, & textarea{
+      display: block;
+      max-width: 400px;
+      font-size: 1.1em;
+      width: 100%;
+    }
+    & textarea{
+      min-height: 9em;
+    }
+    & input[type="submit"]{
+      cursor: pointer;
+      letter-spacing: 0.1em;
+      border: 0;
+      box-shadow: 0;
+      background-color: transparent;
+      color: white;
+      text-transform: uppercase;
+      font-weight: 200;
+      padding: 0.1em;
+    }
+  }
+}
+
+.left-contact{
+  position: relative;
+  width: 50%;
+  padding: 2em;
+  & .capital-headline{
+    letter-spacing: 0.07em;
+    margin-bottom: 1em;
+  }
+  & .small-text{
+    color: grey;
+    font-size: 0.8em;
+  }
+  & .contact-text-page{
+    margin-top: 3em;
+    padding-right: 1em;
+    color: dimgrey;
+    max-width: 450px;
+    line-height: 1.7em;
   }
 }

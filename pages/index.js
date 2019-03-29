@@ -4,7 +4,6 @@ import Head from 'next/head';
 import Navigation from '../components/Navigation';
 import Meta_inf from '../components/Meta_inf';
 import the_SITE_url from  '../components/Vars';
-import global_settings from '../components/Vars';
 import React, { Component, Fragment } from 'react';
 import Router from 'next/router';
 import axios from 'axios';
@@ -14,26 +13,28 @@ var static_mockup = '/static/loading.png';
 export default class extends Component {
 
     static async getInitialProps() {
-      const response = await axios.get( the_SITE_url + '/wp-json/wp/v2/posts')
+      const response   = await axios.get( the_SITE_url + '/wp-json/wp/v2/posts')
+      const response_2 = await axios.get( the_SITE_url + '/wp-json/global-api/v1/settings')
       return {
-        posts: response.data
+        posts: response.data,
+        global_: response_2.data
       }
     }
 
     render() {
-
+      // console.log(this.props.global_);
     return (
       <Fragment>
         <Head>
-          <title>Sport</title>
-          <meta name="description" content="This is an example of a meta description. This will show up in search results." />
+          <title>{this.props.global_.name}</title>
+          <meta name="description" content="{this.props.global_.description}" />
           <Meta_inf />
         </Head>
 
         <div className="page-wrapper">
 
         <section className="left">
-          <Navigation/>
+          <Navigation img_logo={this.props.global_.logo_src}/>
         </section>
 
         <section className="right">
@@ -88,7 +89,7 @@ export default class extends Component {
                       <p className="text-style-wrapper">Adult</p>
                         <img src={
                       this.props.posts.filter(post => ((post.acf.gender === 'female')
-                      && ( post.acf.age === 'children' )  ))[0].acf.icon.sizes.medium
+                      && ( post.acf.age === 'adult' )  ))[0].acf.icon.sizes.medium
                       || static_mockup
                     } alt="Female children product icon."/>
                     </div>

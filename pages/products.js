@@ -145,10 +145,14 @@ export default class extends Component {
 
   static async getInitialProps(context) {
 
-    const response = await axios.get( the_SITE_url + '/wp-json/wp/v2/posts')
+    const response = await axios.get( the_SITE_url + '/wp-json/wp/v2/posts');
+    const response_2 = await axios.get( the_SITE_url + '/wp-json/global-api/v1/settings');
+
     return {
       posts: response.data,
-      query: context.query
+      query: context.query,
+      global_: response_2.data
+
     }
   }
 
@@ -174,16 +178,18 @@ export default class extends Component {
 
     return (
       <Fragment>
+
         <Head>
-          <title>Sport</title>
-          <meta name="description" content="This is an example of a meta description. This will show up in search results." />
-          <Meta_inf/>
+          <title>{this.props.global_.name}</title>
+          <meta name="description" content="{this.props.global_.description}" />
+          <Meta_inf />
         </Head>
 
         <div className="page-wrapper">
 
         <section className="left">
-            <Navigation onClick={this.cleanSearch.bind(this)}
+            <Navigation img_logo={this.props.global_.logo_src}
+              onClick={this.cleanSearch.bind(this)}
               value={this.state.search}
               onChange={this.updateSearch.bind(this)}/>
         </section>
