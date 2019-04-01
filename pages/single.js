@@ -6,8 +6,6 @@ import Meta_inf from '../components/Meta_inf'
 import React, { Component, Fragment } from 'react'
 import axios from 'axios'
 
-require('es6-promise').polyfill();
-
 import the_SITE_url from '../components/Vars';
 
 export default class extends Component {

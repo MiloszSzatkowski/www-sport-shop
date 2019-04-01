@@ -122,6 +122,67 @@ function fetch_products() {
 	})
 }
 
+function colorNavigation() {
+	var wlh = window.location.href
+	var nav_arr = {
+		our_products: document.getElementById('our-products'),
+		male: document.getElementById('male'),
+		male_adult: document.getElementById('male-adult'),
+		male_children: document.getElementById('male-children'),
+		female: document.getElementById('female'),
+		female_adult: document.getElementById('female-adult'),
+		female_children: document.getElementById('female-children'),
+		contact: document.getElementById('contact'),
+		about: document.getElementById('about')
+	}
+
+	function removeEveryOther() {
+		for (var i = 0; i < Object.values(nav_arr).length; i++) {
+			Object.values(nav_arr)[i].classList.remove('red');
+		}
+	}
+
+	if (wlh.includes('contact')) {
+		removeEveryOther();
+		nav_arr.contact.classList.add('red');
+
+	} else if (wlh.includes('about')) {
+		removeEveryOther();
+		nav_arr.about.classList.add('red');
+
+	} else if (wlh.includes('=male') && wlh.includes('=female') && wlh.includes('=children') && wlh.includes('=adult')) {
+		removeEveryOther();
+		nav_arr.our_products.classList.add('red');
+
+	} else if (wlh.includes('=female') && !(wlh.includes('=male')) && wlh.includes('=children') && wlh.includes('=adult')) {
+		removeEveryOther();
+		nav_arr.female.classList.add('red');
+
+	} else if (wlh.includes('=male') && !(wlh.includes('=female')) && wlh.includes('=children') && wlh.includes('=adult')) {
+		removeEveryOther();
+		nav_arr.male.classList.add('red');
+
+	} else if (wlh.includes('=male') && !(wlh.includes('=female')) && wlh.includes('=children') && !(wlh.includes('=adult'))) {
+		removeEveryOther();
+		nav_arr.male.classList.add('red');
+		nav_arr.male_children.classList.add('red');
+
+	} else if (wlh.includes('=male') && !(wlh.includes('=female')) && wlh.includes('=adult') && !(wlh.includes('=children'))) {
+		removeEveryOther();
+		nav_arr.male.classList.add('red');
+		nav_arr.male_adult.classList.add('red');
+
+	} else if (wlh.includes('=female') && !(wlh.includes('=male')) && wlh.includes('=children') && !(wlh.includes('=adult'))) {
+		removeEveryOther();
+		nav_arr.female.classList.add('red');
+		nav_arr.female_children.classList.add('red');
+
+	} else if (wlh.includes('=female') && !(wlh.includes('=male')) && wlh.includes('=adult') && !(wlh.includes('=children'))) {
+		removeEveryOther();
+		nav_arr.female.classList.add('red');
+		nav_arr.female_adult.classList.add('red');
+	}
+}
 
 export default class extends Component {
 
@@ -168,30 +229,11 @@ export default class extends Component {
 	}
 
 	componentDidMount () {
-		var wlh = window.location.href
-		var nav_arr = {
-			our_products: document.getElementById('our-products'),
-			male: document.getElementById('male'),
-			male_adult: document.getElementById('male-adult'),
-			male_children: document.getElementById('male-children'),
-			female: document.getElementById('female'),
-			female_adult: document.getElementById('female-adult'),
-			female_children: document.getElementById('female-children'),
-			contact: document.getElementById('contact'),
-			about: document.getElementById('about')
-		}
+		colorNavigation()
+	}
 
-		if (wlh.includes('contact')) {
-			nav_arr.contact.classList.add('red');
-		} else if (wlh.includes('about')) {
-			nav_arr.about.classList.add('red');
-		} else if (wlh.includes('male') && wlh.includes('female') && wlh.includes('children') && wlh.includes('adult')) {
-			nav_arr.our_products.classList.add('red');
-		} else if (wlh.includes('female') && wlh.includes('children') && wlh.includes('adult')) {
-			nav_arr.female.classList.add('red');
-		} else if (wlh.includes('male') && (!(wlh.includes('female') )) && wlh.includes('children') && wlh.includes('adult')) {
-			nav_arr.male.classList.add('red');
-		}
+	componentDidUpdate () {
+		colorNavigation()
 	}
 
 	render(){
