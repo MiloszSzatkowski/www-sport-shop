@@ -190,6 +190,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_7__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -222,7 +230,22 @@ function HandleEvent(event) {
     //enter pressed
     redirect();
   }
-}
+} // use in case of problem with hiding keyboard on mobile
+// if (window.innerWidth <= 1000) {
+// 	hideKeyboard(document.getElementById('search'));
+// }
+//
+// function hideKeyboard(element) {
+//     element.setAttribute('readonly', 'readonly'); // Force keyboard to hide on input field.
+//     element.removeAttribute('disabled', 'true'); // Force keyboard to hide on textarea field.
+//     setTimeout(function() {
+//         element.blur();  //actually close the keyboard
+//         // Remove readonly attribute after keyboard is hidden.
+//         element.removeAttribute('readonly');
+//         element.removeAttribute('disabled');
+//     }, 100);
+// }
+
 
 function redirect(event) {
   if (window.location.href.indexOf('products') === -1 || window.location.href.indexOf('details') !== -1) {
@@ -409,6 +432,26 @@ function colorNavigation() {
   }
 }
 
+function showMobileMenu() {
+  var menu = document.getElementById('main_navigation');
+  menu.style.display = 'block';
+  menu.classList.remove('slideUp');
+  menu.classList.add('slideDown');
+  var ham = document.getElementById('hamburger');
+  ham.style.display = "none";
+}
+
+function closeMobileMenu() {
+  var menu = document.getElementById('main_navigation');
+  menu.classList.remove('slideDown');
+  menu.classList.add('slideUp');
+  setTimeout(function () {
+    menu.style.display = 'none';
+  }, 700);
+  var ham = document.getElementById('hamburger');
+  ham.style.display = "flex";
+}
+
 var _default =
 /*#__PURE__*/
 function (_Component) {
@@ -473,6 +516,12 @@ function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       colorNavigation();
+
+      if (window.innerWidth <= 1000) {
+        _toConsumableArray(document.getElementsByClassName('hide_menu')).forEach(function (item) {
+          item.addEventListener('click', closeMobileMenu);
+        });
+      }
     }
   }, {
     key: "componentDidUpdate",
@@ -485,9 +534,45 @@ function (_Component) {
       var global = {
         state: this.state
       };
-      return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("nav", {
+      return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        id: "hamburger",
+        className: "hamburger"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        href: "/"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+        onClick: this.props.onClick,
+        href: "/",
+        prefetch: true
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
+        id: "logo",
+        src: this.props.img_logo,
+        alt: "logo"
+      }))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "input"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
+        type: "text",
+        value: this.props.value,
+        onChange: this.props.onChange,
+        onKeyDown: this.props.HandleEvent,
+        id: "search",
+        placeholder: "search..."
+      }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", {
+        className: "zoom",
+        onClick: redirect
+      })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", {
+        className: "ham",
+        onClick: showMobileMenu
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
+        src: "/static/hamburger.png",
+        alt: "menu"
+      }))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("nav", {
+        id: "main_navigation",
         className: "navigation"
-      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        id: "closer",
+        className: "closer",
+        onClick: closeMobileMenu
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", null, "\u2716")), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
         href: "/"
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
         onClick: this.props.onClick,
@@ -509,10 +594,11 @@ function (_Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
         id: "our-products",
+        className: "hide_menu",
         onClick: this.props.onClick,
         href: "/"
       }, "Our products"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-        className: "input"
+        className: "input large_screen"
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
         type: "text",
         value: this.props.value,
@@ -542,7 +628,7 @@ function (_Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
         id: "male",
-        className: "nav-category-header",
+        className: "nav-category-header hide_menu",
         onClick: this.props.onClick,
         href: ""
       }, "Male (", global.state.nr_men, ")"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
@@ -557,6 +643,7 @@ function (_Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
         id: "male-adult",
+        className: "hide_menu",
         onClick: this.props.onClick,
         href: "/"
       }, "Adult   (", global.state.nr_ad_m, ")"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
@@ -569,6 +656,7 @@ function (_Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
         id: "male-children",
+        className: "hide_menu",
         onClick: this.props.onClick,
         href: "/"
       }, "Children  (", global.state.nr_ch_m, ")")))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
@@ -583,7 +671,7 @@ function (_Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
         id: "female",
-        className: "nav-category-header",
+        className: "nav-category-header hide_menu",
         onClick: this.props.onClick,
         href: ""
       }, "Female (", global.state.nr_wom, ")"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
@@ -598,6 +686,7 @@ function (_Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
         id: "female-adult",
+        className: "hide_menu",
         onClick: this.props.onClick,
         href: ""
       }, "Adult (", global.state.nr_ad_f, ")"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
@@ -610,6 +699,7 @@ function (_Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
         id: "female-children",
+        className: "hide_menu",
         onClick: this.props.onClick,
         href: "/"
       }, "Children (", global.state.nr_ch_f, ")")))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
@@ -620,6 +710,7 @@ function (_Component) {
         href: "/contact"
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
         id: "contact",
+        className: "hide_menu",
         href: "/contact",
         prefetch: true
       }, "Contact us"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
@@ -628,6 +719,7 @@ function (_Component) {
         href: "/about"
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
         id: "about",
+        className: "hide_menu",
         href: "/about",
         prefetch: true
       }, "About")))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("footer", {

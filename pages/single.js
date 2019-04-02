@@ -102,7 +102,7 @@ export default class extends Component {
           <div className="wrapper-single-post">
 
             <div className="single-images">
-              <div><img alt="" src={ global.state.image_data_1 }/></div>
+              <div><img alt="" className="sec_im_1"  src={ global.state.image_data_1 }/></div>
               <div> <img alt="" className="sec_im_1" src={ global.state.image_data_2 }/></div>
             </div>
 
@@ -140,7 +140,9 @@ export default class extends Component {
               <div>{this.props.post.acf.description}</div>
 
             </div>
-            <div className="single-images"> <img alt="" className="sec_im_2" src={ global.state.image_data_2 }/></div>
+
+            <div className="single-images-2"> <img alt="" className="sec_im_2" src={ global.state.image_data_1 }/></div>
+            <div className="single-images-2"> <img alt="" className="sec_im_2" src={ global.state.image_data_2 }/></div>
 
 
           </div>

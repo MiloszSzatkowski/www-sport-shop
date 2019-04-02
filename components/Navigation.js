@@ -14,6 +14,22 @@ function HandleEvent(event){
 	}
 }
 
+// use in case of problem with hiding keyboard on mobile
+// if (window.innerWidth <= 1000) {
+// 	hideKeyboard(document.getElementById('search'));
+// }
+//
+// function hideKeyboard(element) {
+//     element.setAttribute('readonly', 'readonly'); // Force keyboard to hide on input field.
+//     element.removeAttribute('disabled', 'true'); // Force keyboard to hide on textarea field.
+//     setTimeout(function() {
+//         element.blur();  //actually close the keyboard
+//         // Remove readonly attribute after keyboard is hidden.
+//         element.removeAttribute('readonly');
+//         element.removeAttribute('disabled');
+//     }, 100);
+// }
+
 function redirect(event) {
 	if ((window.location.href.indexOf('products') === -1) ||
 			(window.location.href.indexOf('details') !== -1)) {
@@ -184,6 +200,26 @@ function colorNavigation() {
 	}
 }
 
+function showMobileMenu() {
+	let menu = document.getElementById('main_navigation');
+	menu.style.display = 'block';
+	menu.classList.remove('slideUp');
+	menu.classList.add('slideDown');
+	let ham = document.getElementById('hamburger');
+	ham.style.display = "none";
+}
+
+function closeMobileMenu() {
+	let menu = document.getElementById('main_navigation');
+	menu.classList.remove('slideDown');
+	menu.classList.add('slideUp');
+	setTimeout(function () {
+		menu.style.display = 'none';
+	}, 700);
+	let ham = document.getElementById('hamburger');
+	ham.style.display = "flex";
+}
+
 export default class extends Component {
 
 	constructor(props) {
@@ -229,7 +265,12 @@ export default class extends Component {
 	}
 
 	componentDidMount () {
-		colorNavigation()
+		colorNavigation();
+		if (window.innerWidth <= 1000) {
+			[...(document.getElementsByClassName('hide_menu'))].forEach(function (item) {
+				item.addEventListener('click', closeMobileMenu)
+			});
+		}
 	}
 
 	componentDidUpdate () {
@@ -241,7 +282,32 @@ export default class extends Component {
 
 		return(
 			<div>
-		  <nav className="navigation">
+
+
+			<div id="hamburger" className="hamburger">
+
+				<Link href="/"><a  onClick={this.props.onClick} href="/" prefetch >
+					<img id="logo" src={this.props.img_logo} alt="logo" /></a></Link>
+
+						<div className="input">
+						<input type="text"
+						value={this.props.value}
+						onChange={this.props.onChange}
+						onKeyDown={this.props.HandleEvent}
+						id="search"
+						placeholder="search..."
+						 ></input>
+					 <span className="zoom" onClick={redirect}></span>
+						</div>
+
+				<span className="ham" onClick={showMobileMenu}>
+					<img src="/static/hamburger.png" alt="menu" /></span>
+
+			</div>
+
+		  <nav id="main_navigation" className="navigation">
+
+			<div id="closer" className="closer" onClick={closeMobileMenu}><p>&#10006;</p></div>
 
 		  <div><Link href="/"><a  onClick={this.props.onClick} href="/" prefetch >
 				<img id="logo" src={this.props.img_logo} alt="logo" /></a></Link></div>
@@ -249,12 +315,12 @@ export default class extends Component {
 		  <div className="nav-our-products" ><Link
 				href={{ pathname: '/products', query: { gender: ['','female',  'male'],
 				age : ['','children','adult']   } }}>
-		  <a id="our-products" onClick={this.props.onClick} href="/">
+		  <a id="our-products" className="hide_menu"  onClick={this.props.onClick} href="/">
 		  Our products
 		  </a></Link>
 		  </div>
 
-			<div className="input">
+			<div className="input large_screen">
 			<input type="text"
 			value={this.props.value}
 			onChange={this.props.onChange}
@@ -273,38 +339,38 @@ export default class extends Component {
 
 			<div className="nav-category-header-wrapper">
 		  <Link  href={{ pathname: '/products', query: {     gender: ['','male'],           age : ['','children','adult']    } }} >
-		  <a id="male" className="nav-category-header" onClick={this.props.onClick} href="">
+		  <a id="male" className="nav-category-header hide_menu" onClick={this.props.onClick} href="">
 		  Male ({global.state.nr_men})
 		  </a></Link></div>
 
 			<div className="nav-tabbed-subcategories">
 			  <div ><Link  href={{ pathname: '/products', query: {   gender: ['', 'male'],      age : ['','adult']  } }}>
-			  <a id="male-adult" onClick={this.props.onClick} href="/">
+			  <a id="male-adult" className="hide_menu" onClick={this.props.onClick} href="/">
 			  Adult   ({global.state.nr_ad_m})
 			  </a></Link></div>
 
 			  <div ><Link  href={{ pathname: '/products', query: {    gender: ['', 'male'],  age : ['','children']  } }}>
-			  <a  id="male-children"  onClick={this.props.onClick}  href="/">
+			  <a  id="male-children" className="hide_menu"  onClick={this.props.onClick}  href="/">
 			  Children  ({global.state.nr_ch_m})
 			  </a></Link></div>
 		  </div>
 
 		  <div className="nav-category-header-wrapper">
 		  <Link  href={{ pathname: '/products', query: { gender: ['', 'female'], age : ['','children','adult']  } }}>
-		  <a id="female" className="nav-category-header" onClick={this.props.onClick} href="">
+		  <a id="female" className="nav-category-header hide_menu" onClick={this.props.onClick} href="">
 		  Female ({global.state.nr_wom})
 		  </a></Link></div>
 
 			<div className="nav-tabbed-subcategories">
 			  <div >
 			  <Link  href={{ pathname: '/products', query: { gender: ['', 'female'], age : ['','adult']    } }}>
-			  <a id="female-adult"  onClick={this.props.onClick} href="">
+			  <a id="female-adult" className="hide_menu"  onClick={this.props.onClick} href="">
 			  Adult ({global.state.nr_ad_f})
 			  </a></Link>
 			  </div>
 
 			  <div ><Link  href={{ pathname: '/products', query: { gender: ['', 'female'], age : ['','children']  } }}>
-			  <a id="female-children"   onClick={this.props.onClick} href="/">
+			  <a id="female-children" className="hide_menu"   onClick={this.props.onClick} href="/">
 			  Children ({global.state.nr_ch_f})
 			  </a></Link>
 			  </div>
@@ -312,9 +378,9 @@ export default class extends Component {
 
 			<div className="nav-contact-about-subpages-wrapper">
 			  <div className="nav-contact-about-subpages">
-					<Link href="/contact"><a id="contact"  href="/contact" prefetch >Contact us</a></Link></div>
+					<Link href="/contact"><a id="contact" className="hide_menu"  href="/contact" prefetch >Contact us</a></Link></div>
 			  <div className="nav-contact-about-subpages">
-					<Link href="/about"><a id="about"  href="/about" prefetch >About</a></Link></div>
+					<Link href="/about"><a id="about" className="hide_menu"  href="/about" prefetch >About</a></Link></div>
 			</div>
 
 		  <footer className="social-icons">

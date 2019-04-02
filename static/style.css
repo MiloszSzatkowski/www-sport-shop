@@ -98,6 +98,7 @@ html,body,div,a{font-family: 'Roboto', sans-serif;}
  }
 
  .navigation{
+   display: block;
    & a{
      letter-spacing: 0.08em;
      color: black;
@@ -445,7 +446,7 @@ html,body,div,a{font-family: 'Roboto', sans-serif;}
 .wrapper-single-post{
   padding-top: 2em;
   display: grid;
-  grid-template-columns:  repeat(auto-fill, minmax(450px, 1fr))!important;
+  grid-template-columns:  repeat(auto-fill, minmax(400px, 1fr))!important;
   & h1{
     margin-top: 3em;
     text-transform: uppercase;
@@ -512,19 +513,6 @@ html,body,div,a{font-family: 'Roboto', sans-serif;}
 .sec_im_2 {
   display: none;
 }
-
-@media (max-width:1100px) {
-  .single-desc{
-    padding: 2em;
-  }
-  .sec_im_1 {
-    display: none;
-  }
-  .sec_im_2 {
-    display: block;
-  }
-}
-
 
 /* CONTACT */
 
@@ -609,24 +597,96 @@ html,body,div,a{font-family: 'Roboto', sans-serif;}
 }
 
 
+
 /* MEDIA QUERY */
 
-@media (max-width: 1000px) {
-  .left{
-    width: 100vw;
+#closer{display: none;}
+#hamburger{display: none;}
+
+@media (max-width: 1200px) {
+  .wrapper-inner-products span{
+    font-size: 0.9em!important;
+  }
+  .wrapper-single-post{
+    margin-top: 0;
+    padding-top: 0;
+    display: block;
+    font-size: 90%;
+    & img{
+      max-width: 500px;
+      width: 98.2%!important;
+    }
+  }
+  .wrapper-single-post .single-desc{
+    padding: 1em;
+  }
+  .wrapper-single-post .single-desc h1{
+    padding: 0;
+    margin-top: 0.4em;
+  }
+  .sec_im_1 {
+    padding-top: 1em;
     display: none;
+  }
+  .sec_im_2 {
+    padding-top: 1em;
+    display: block;
+  }
+}
+
+@media (max-width: 600px) {
+  .landing-page-categories-wrapper{
+    display: block;
+    & .categories-wrapper{
+      margin-top: 2em;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  html:not(.navigation){
+    font-size: 90%;
+  }
+  .products-top-description{
+    font-size: 0.9em;
+  }
+
+  #closer{
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    height: 2em;
+    top: 0;
+    right: 4em;
+    text-align: right;
+    z-index: 300;
+    padding: 1em;
+    font-weight: 900;
+  }
+  .left{
+    margin: 0;
+    padding: 0;
     position: absolute;
     background-color: white;
-    z-index: 250;
-    height: 100%;
   }
   .navigation{
+    top: -100%;
+    padding: 1.5em;
+    background-color: white;
     width: 100vw;
+    display: none;
+    /* display: block; */
+    z-index: 250;
+    width: 100vw;
+    height: 100vh;
     position: relative;
   }
   .right{
     width: 100%;
     padding: 1em;
+  }
+  .subpages-title{
+    text-align: left;
   }
   .page-wrapper-contact{
     display: block;
@@ -636,21 +696,108 @@ html,body,div,a{font-family: 'Roboto', sans-serif;}
     width: 95vw;
   }
   section.right-contact{
-    margin-top: 2em;
+    margin-top: 2.5em;
   }
   .page-wrapper-contact .right-contact{
-    float: left;
+    display: flex;
     max-width: 95vw;
-    width: 80%;
+    width: 90%;
     padding: 0;
+    justify-content: center;
   }
   .left-contact .contact-text-page{
-    width: 100%;
     max-width: 95vw;
-    padding-right: 4em;
+    padding-right: 2em;
+  }
+  .right{
+    margin-top: 2.5em;
+  }
+
+  #hamburger{
+    padding-left: 1em;
+    padding-right: 1em;
+    z-index: 300;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 99vw;
+    background-color: white;
+    position: relative;
+    & input{
+      width: auto;
+      padding-right: 20px;
+      padding-bottom: 2px;
+      &::placeholder{
+        color: grey;
+        font-family: inherit;
+        font-size: 0.7em;
+        font-weight: 300;
+      }
+    }
+    & .zoom{
+      height: 1.2em;
+      width: 1.2em;
+    }
+    & #logo{
+      padding: 0.5em;
+      height: 2em;
+      cursor: pointer;
+    }
+    & .ham{
+      height: 2em;
+      & img{
+        cursor: pointer;
+        height: 1.5em;
+        padding: 0.6em 2em 2em 0;
+      }
+    }
+  }
+
+  #put-xxx{
+    display: none;
+  }
+
+  .large_screen{
+    display: none;
+  }
+
+}
+
+@keyframes hide {
+  from {
+    top:0;
+  }
+
+  to {
+    top: -100%;
   }
 }
 
-.hamburger{
+@keyframes show {
+  from {
+    top: -100%;
+  }
 
+  to {
+    top:0;
+  }
+}
+
+.slideDown{
+  animation-duration: 0.3s;
+  animation-name: show;
+  animation-iteration-count: 1;
+  top: 0;
+}
+
+.slideUp{
+  animation-duration: 0.3s;
+  animation-name: hide;
+  animation-iteration-count: 1;
+}
+
+@media (max-width: 300px) {
+  .hamburger .input{
+    transform: scale(0.8);
+  }
 }
