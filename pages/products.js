@@ -90,6 +90,10 @@ function remove_from_arr(array, string) {
   return array;
 }
 
+function redirect_to_main() {
+  Router.push('/products?gender=&gender=female&gender=male&age=&age=children&age=adult')
+}
+
 export default class extends Component {
 
   componentDidMount(){
@@ -106,7 +110,7 @@ export default class extends Component {
     var that = this;
 
     var existing_xs = document.getElementsByClassName('x_butt_filter');
-    // console.log(existing_xs);
+    console.log(existing_xs);
     var x_exists = existing_xs.length > 0;
 
     if (x_exists) {
@@ -232,7 +236,8 @@ export default class extends Component {
                       )
                     }
               </span>
-                <p className="filters-headline">
+                <p className="filters-headline"
+                  onClick={redirect_to_main}>
                   {(this.props.query.filters != undefined) ?  <span className="filters-headline-before"></span>  : '' }
                   {(this.props.query.filters != undefined) ? this.props.query.filters   : '' }
                 </p>

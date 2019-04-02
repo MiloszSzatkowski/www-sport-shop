@@ -933,6 +933,10 @@ function remove_from_arr(array, string) {
   return array;
 }
 
+function redirect_to_main() {
+  next_router__WEBPACK_IMPORTED_MODULE_9___default.a.push('/products?gender=&gender=female&gender=male&age=&age=children&age=adult');
+}
+
 var _default =
 /*#__PURE__*/
 function (_Component) {
@@ -956,8 +960,8 @@ function (_Component) {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
       var that = this;
-      var existing_xs = document.getElementsByClassName('x_butt_filter'); // console.log(existing_xs);
-
+      var existing_xs = document.getElementsByClassName('x_butt_filter');
+      console.log(existing_xs);
       var x_exists = existing_xs.length > 0;
 
       if (x_exists) {
@@ -1123,7 +1127,8 @@ function (_Component) {
           return i != '';
         })).length > 1 && index == 0 ? "   &" : ''));
       })), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("p", {
-        className: "filters-headline"
+        className: "filters-headline",
+        onClick: redirect_to_main
       }, this.props.query.filters != undefined ? react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("span", {
         className: "filters-headline-before"
       }) : '', this.props.query.filters != undefined ? this.props.query.filters : ''))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("hr", {

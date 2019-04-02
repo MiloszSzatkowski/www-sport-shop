@@ -416,12 +416,25 @@ html,body,div,a{font-family: 'Roboto', sans-serif;}
   letter-spacing: 0.06em;
   & .filters-headline{
     margin: 0;
-    display: block;
+    display: flex;
+    cursor: pointer;
+  }
+  & .filters-headline:hover{
+    color: red;
   }
 }
 
-.filters-headline-before{
-  display: inline-block;
+.filters-headline-before:before{
+  content: '✕';
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  font-size: 0.5em;
+  padding: 0.5em;
+  text-align: center;
+  color: white;
   width:1em;
   height: 1em;
   background-color: rgba(255, 0, 0, 0.5);
